@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
 
 const Inicio = () => {
     const texto: string = "Este es el inicio";
+    const [datos, setDatos] = useState(null);
+    useEffect(() => {
+        Axios.post("http://localhost:3000/api/prueba", {})
+            .then(respuesta => setDatos(respuesta.data.method));
+    }, []);
     return (
-        <div>
+        <div className="Inicio">
             <h1>{texto}</h1>
             <p>Esto es un texto</p>
-            <p>Esto es nuevo</p>
+            <p>{datos}</p>
             <style jsx>{`
-                body {
+                .Inicio {
                     color: blue;
                 }
             `}</style>
