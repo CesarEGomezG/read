@@ -5,7 +5,7 @@ const Inicio = () => {
     const texto: string = "Este es el inicio";
     const [datos, setDatos] = useState(null);
     useEffect(() => {
-        Axios.post("http://localhost:3000/api/prueba", {})
+        Axios.post("https://read-eight.vercel.app/api/prueba", {})
             .then(respuesta => setDatos(respuesta.data.method));
     }, []);
     return (
