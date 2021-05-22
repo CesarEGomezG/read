@@ -1,0 +1,27 @@
+{
+  "name": "read",
+  "version": "0.0.0",
+  "description": "plataforma de lecturas",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [
+    "lectura",
+    "read",
+    "web",
+    "movil",
+    "responsive",
+    "next"
+  ],
+  "author": "Cesar Gomez",
+  "license": "MIT",
+  "dependencies": {
+    "@types/react": "^17.0.6",
+    "next": "^10.2.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
