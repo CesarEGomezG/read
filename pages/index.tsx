@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from "react";
-import Axios from "axios";
+import React from "react";
+import ContenedorLecturas from "../components/ContenedorLecturas";
+import BarraSuperior from "../components/BarraSuperior";
 
-const Inicio = () => {
-    const texto: string = "Este es el inicio";
-    const [datos, setDatos] = useState(null);
-    useEffect(() => {
-        Axios.post("https://read-eight.vercel.app/api/prueba", {})
-            .then(respuesta => setDatos(respuesta.data.method));
-    }, []);
+import lecturasBasico from "../mocks/lecturasBasico";
+
+const Principal = () => {
     return (
-        <div className="Inicio">
-            <h1>{texto}</h1>
-            <p>Esto es un texto</p>
-            <p>{datos}</p>
-            <style jsx>{`
-                .Inicio {
-                    color: blue;
-                }
-            `}</style>
+        <div>
+            <BarraSuperior />
+            <h1>Principal</h1>
+            <ContenedorLecturas titulo="Cocina" lecturas={lecturasBasico} />
         </div>
     )
-}
+};
 
-export default Inicio;
+export default Principal;
