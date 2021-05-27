@@ -1,6 +1,10 @@
 import React from "react";
 
-const BarraSuperior = () => {
+interface IPropsBarraSuperior {
+    urlFotoPerfil: string
+}
+
+const BarraSuperior = ({ urlFotoPerfil }: IPropsBarraSuperior) => {
     return (
         <div className="BarraSuperior">
             <div className="izquierda">
@@ -10,7 +14,7 @@ const BarraSuperior = () => {
             </div>
             <div className="derecha">
                 <div>
-                    <img src="" alt="Foto de perfil del usuario" />
+                    <img className="fotoPerfil" src={urlFotoPerfil} alt="Foto de perfil del usuario" />
                 </div>
                 <div>
                     <img src="" alt="Boton del menu desplegable" />
@@ -20,6 +24,12 @@ const BarraSuperior = () => {
                 .BarraSuperior {
                     background-color: lightblue;
                     width: 100%;
+                }
+                .BarraSuperior .derecha .fotoPerfil {
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
                 }
             `}</style>
         </div>
