@@ -31,7 +31,9 @@ const ContenedorLecturas = ({ titulo, lecturas }: IPropsContenedorLecturas) => {
                 }
                 .ContenedorLecturas {
                     width: 100%;
-                    background-color: lightblue;
+                }
+                .ContenedorLecturas h2 {
+                    margin: 0;
                 }
             `}</style>
         </div>

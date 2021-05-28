@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-// ! Esta pagina se llama igual que el componente Lectura
-const Lectura = () => {
+import lecturasBasico from "../../mocks/lecturasBasico";
+
+const PaginaLectura = () => {
     const router = useRouter();
+    const [imagen, setImagen] = useState<string>("");
+    useEffect(() => {
+        if(router.query.id && typeof router.query.id === "string") {
+            const idLectura = parseInt(router.query.id);
+            setImagen(lecturasBasico.find(lectura => lectura.idLectura === idLectura).imagen);
+        };
+    }, [router.query.id]);
     return (
-        <div>
-            <h1>Lectura con id {router.query.id}</h1>
+        <div className="PaginaLectura">
+            <img className="imagenPortada" src={imagen} alt="Imagen de portada" />
+            <style jsx>{`
+                .PaginaLectura .imagenPortada {
+                    width: 100%;
+                    height: 160px;
+                    object-fit: cover;
+                }
+            `}</style>
         </div>
     );
 };
 
-export default Lectura;
+export default PaginaLectura;

@@ -2,7 +2,7 @@ interface ILecturaBasico {
     idLectura: number,
     titulo: string,
     imagen: string,
-    idAutor: number
+    idBlog: number
 }
 
 export default ILecturaBasico;

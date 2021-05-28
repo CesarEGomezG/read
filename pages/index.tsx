@@ -6,7 +6,7 @@ import lecturasBasico from "../mocks/lecturasBasico";
 const Principal = () => {
     return (
         <div>
-            <h1>Principal</h1>
+            <ContenedorLecturas titulo="Lecturas de blogs a los que estoy suscrito" lecturas={lecturasBasico} />
             <ContenedorLecturas titulo="Lecturas recomendadas" lecturas={lecturasBasico} />
         </div>
     )
