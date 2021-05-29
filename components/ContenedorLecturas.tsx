@@ -15,7 +15,7 @@ const ContenedorLecturas = ({ titulo, lecturas }: IPropsContenedorLecturas) => {
                 {
                     lecturas && lecturas.length > 0 && lecturas.map(lectura => {
                         return(
-                            <li key={lectura.idLectura}>
+                            <li key={lectura.id}>
                                 <Lectura lectura={lectura} />
                             </li>
                         );

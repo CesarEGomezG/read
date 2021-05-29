@@ -9,7 +9,7 @@ interface IPropsLectura {
 const Lectura = ({ lectura }: IPropsLectura) => {
     return (
         <div className="Lectura">
-            <Link href={`/lectura/${lectura.idLectura}`}>
+            <Link href={`/lectura/${lectura.id}`}>
                 <div className="parteLectura">
                     <img src={lectura.imagen} alt="Imagen de la lectura" />
                     <h3 className="tituloLectura">{lectura.titulo}</h3>

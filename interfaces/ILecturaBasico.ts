@@ -1,5 +1,5 @@
 interface ILecturaBasico {
-    idLectura: number,
+    id: number,
     titulo: string,
     imagen: string,
     idBlog: number
