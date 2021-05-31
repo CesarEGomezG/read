@@ -9,6 +9,7 @@ const metodoGet = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const lecturasCompletoId = (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method === "GET") metodoGet(req, res);
+    else res.status(400).send("Algo salio mal");
 }
 
 export default lecturasCompletoId;
