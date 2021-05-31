@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Axios from "axios";
 
 const Acceso = () => {
+    console.log("Esta es la url de la API -> " + (process.env.URL_API || "http://localhost:3000/api/"));
     const [correo, setCorreo] = useState<string>("");
     const [contrasenia, setContrasenia] = useState<string>("");
 
