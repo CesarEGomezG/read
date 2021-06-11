@@ -25,6 +25,8 @@ const ContenedorLecturas = ({ titulo, lecturas }: IPropsContenedorLecturas) => {
             <style jsx>{`
                 ul {
                     padding: 0;
+                    display: grid;
+                    grid-template-columns: 1fr;
                 }
                 li {
                     list-style-type: none;
@@ -34,6 +36,27 @@ const ContenedorLecturas = ({ titulo, lecturas }: IPropsContenedorLecturas) => {
                 }
                 .ContenedorLecturas h2 {
                     margin: 0;
+                }
+                
+                @media only screen and (min-width: 426px) {
+                    ul {
+                        grid-template-columns: 1fr 1fr;
+                    }
+                }
+                @media only screen and (min-width: 626px) {
+                    ul {
+                        grid-template-columns: 1fr 1fr 1fr;
+                    }
+                }
+                @media only screen and (min-width: 826px) {
+                    ul {
+                        grid-template-columns: 1fr 1fr 1fr 1fr;
+                    }
+                }
+                @media only screen and (min-width: 1026px) {
+                    ul {
+                        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                    }
                 }
             `}</style>
         </div>
