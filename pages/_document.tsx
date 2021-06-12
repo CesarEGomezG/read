@@ -9,7 +9,6 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-        <style jsx>{`body { margin: 0; }`}</style>
       </Html>
     )
   }
