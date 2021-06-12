@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Axios from "axios";
 
-const Acceso = () => {
+const IniciarSesion = () => {
     console.log("Esta es la url de la API -> " + (process.env.URL_API || "http://localhost:3000/api/"));
     const [correo, setCorreo] = useState<string>("");
     const [contrasenia, setContrasenia] = useState<string>("");
@@ -17,8 +17,9 @@ const Acceso = () => {
         setContrasenia(campoContrasenia.current.value);
     }
 
-    const iniciarSesion = async () => {
-        const respuesta = await Axios.post("http://localhost:3000/api/autenticacion", {
+    const iniciarSesion = async (evento) => {
+        evento.preventDefault();
+        const respuesta = await Axios.post("http://localhost:3000/api/autenticacion/iniciar-sesion", {
             tipo: "correo",
             correo,
             contrasenia
@@ -29,7 +30,7 @@ const Acceso = () => {
     return (
         <div className="IniciarSesion">
             <h1>Iniciar sesión</h1>
-            <form>
+            <form onSubmit={iniciarSesion}>
                 <label>
                     <span>Correo electrónico:</span>
                     <input type="text" ref={campoCorreo} onChange={cambioCorreo} />
@@ -38,7 +39,7 @@ const Acceso = () => {
                     <span>Contraseña:</span>
                     <input type="password" ref={campoContrasenia} onChange={cambioContrasenia} />
                 </label>
-                <input type="button" value="Iniciar sesión" onClick={iniciarSesion} />
+                <button>Iniciar sesión</button>
             </form>
             <style jsx>{`
                 .IniciarSesion h1 {
@@ -70,4 +71,4 @@ const Acceso = () => {
     )
 }
 
-export default Acceso;
+export default IniciarSesion;

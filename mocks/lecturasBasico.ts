@@ -15,8 +15,8 @@ const lecturasBasico: ILecturasBasico[] = [
     },
     {
         id: 2,
-        titulo: "Pensar rápido, pensar despacio - Daniel Kahneman",
-        imagen: "https://i.ytimg.com/vi/m8lyhVIn01w/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA5pE6WBm7NdNDUgXTe1Z6ToOuHhQ",
+        titulo: "UNAM prepara en CDMX regreso a clases",
+        imagen: "https://i.ytimg.com/vi/ntUNQcVGrvg/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBHSQu3RwvUKPrkzkbjEY7smRKZCA",
         idBlog: 2
     },
     {
