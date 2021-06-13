@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 const config = {
     modo: process.env.NODE_ENV,
     nombreBaseDatos: process.env.DB_NAME,
