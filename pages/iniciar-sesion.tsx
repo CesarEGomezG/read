@@ -21,7 +21,7 @@ const IniciarSesion = () => {
     const iniciarSesion = async (evento) => {
         evento.preventDefault();
         let urlApi = "http://localhost:3000/api/autenticacion/iniciar-sesion";
-        if(process.env.URL_API) urlApi = process.env.NEXT_PUBLIC_URL_API + "/autenticacion/iniciar-sesion";
+        if(process.env.NEXT_PUBLIC_URL_API) urlApi = process.env.NEXT_PUBLIC_URL_API + "/autenticacion/iniciar-sesion";
         const respuesta = await Axios.post(urlApi, {
             tipo: "correo",
             correo,
