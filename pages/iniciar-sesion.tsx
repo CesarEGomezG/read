@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import Axios from "axios";
 
 const IniciarSesion = () => {
+    console.log("privada -> ", process.env.URL_API);
+    console.log("publica -> ", process.env.NEXT_PUBLIC_URL_API);
     const [correo, setCorreo] = useState<string>("");
     const [contrasenia, setContrasenia] = useState<string>("");
 
@@ -19,7 +21,7 @@ const IniciarSesion = () => {
     const iniciarSesion = async (evento) => {
         evento.preventDefault();
         let urlApi = "http://localhost:3000/api/autenticacion/iniciar-sesion";
-        if(process.env.URL_API) urlApi = process.env.URL_API + "/autenticacion/iniciar-sesion";
+        if(process.env.URL_API) urlApi = process.env.NEXT_PUBLIC_URL_API + "/autenticacion/iniciar-sesion";
         const respuesta = await Axios.post(urlApi, {
             tipo: "correo",
             correo,
