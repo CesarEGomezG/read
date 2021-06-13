@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import bcrypt from "bcrypt";
 import Axios from "axios";
 
 const CrearCuenta = () => {
@@ -32,7 +33,7 @@ const CrearCuenta = () => {
                 fechaNacimiento,
                 nombreUsuario,
                 correo,
-                contrasenia // Corregir: ALERTA DE SEGURIDAD !!!!!!!!!!!!
+                contrasenia
             });
             console.log(respuesta);
         } catch(error) {
