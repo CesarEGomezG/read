@@ -43,6 +43,18 @@ class LibMongo {
         });
     }
 
+    obtenerUnoPorFiltro(coleccion, filtro) {
+        return this.conectar().then(db => {
+            return db.collection(coleccion).findOne(filtro);
+        })
+    }
+
+    obtenerPorFiltro(coleccion, filtro) {
+        return this.conectar().then(db => {
+            return db.collection(coleccion).find(filtro);
+        })
+    }
+
     crear(coleccion, datos) {
         return this.conectar().then(db => {
             return db.collection(coleccion).insertOne(datos);

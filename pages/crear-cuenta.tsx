@@ -2,15 +2,17 @@ import React, { useState, useRef } from "react";
 import Axios from "axios";
 
 const CrearCuenta = () => {
-    const [nombre, setNombre] = useState<string>("");
-    const [apellido, setApellido] = useState<string>("");
+    const [mensajeError, setMensajeError] = useState<string>("");
+
+    const [nombres, setNombre] = useState<string>("");
+    const [apellidos, setApellido] = useState<string>("");
     const [fechaNacimiento, setFechaNacimiento] = useState<string>("");
     const [nombreUsuario, setNombreUsuario] = useState<Date>(new Date());
     const [correo, setCorreo] = useState<string>("");
     const [contrasenia, setContrasenia] = useState<string>("");
 
-    const campoNombre = useRef(null);
-    const campoApellido = useRef(null);
+    const campoNombres = useRef(null);
+    const campoApellidos = useRef(null);
     const campoFechaNacimiento = useRef(null);
     const campoNombreUsuario = useRef(null);
     const campoCorreo = useRef(null);
@@ -22,16 +24,21 @@ const CrearCuenta = () => {
 
     const crearCuenta = async (evento) => {
         evento.preventDefault();
-        const respuesta = await Axios.post("http://localhost:3000/api/autenticacion/usuarios", {
-            tipo: "correo",
-            nombre,
-            apellido,
-            fechaNacimiento,
-            nombreUsuario,
-            correo,
-            contrasenia // ALERTA DE SEGURIDAD !!!!!!!!!!!!
-        });
-        console.log(respuesta);
+        try {
+            const respuesta = await Axios.post("http://localhost:3000/api/autenticacion/crear-cuenta", {
+                tipo: "correo",
+                nombres,
+                apellidos,
+                fechaNacimiento,
+                nombreUsuario,
+                correo,
+                contrasenia // Corregir: ALERTA DE SEGURIDAD !!!!!!!!!!!!
+            });
+            console.log(respuesta);
+        } catch(error) {
+            console.log(error);
+            setMensajeError(error.message);
+        }
     }
 
     return (
@@ -40,11 +47,11 @@ const CrearCuenta = () => {
             <form onSubmit={crearCuenta}>
                 <label>
                     <span>Nombre(s):</span>
-                    <input type="text" ref={campoNombre} onChange={() => cambioInput(campoNombre, setNombre)} />
+                    <input type="text" ref={campoNombres} onChange={() => cambioInput(campoNombres, setNombre)} />
                 </label>
                 <label>
                     <span>Apellido(s):</span>
-                    <input type="text" ref={campoApellido} onChange={() => cambioInput(campoApellido, setApellido)} />
+                    <input type="text" ref={campoApellidos} onChange={() => cambioInput(campoApellidos, setApellido)} />
                 </label>
                 <label>
                     <span>Fecha de nacimiento:</span>
@@ -63,6 +70,7 @@ const CrearCuenta = () => {
                     <input type="password" ref={campoContrasenia} onChange={() => cambioInput(campoContrasenia, setContrasenia)} />
                 </label>
                 <button>Crear cuenta</button>
+                <p>{mensajeError}</p>
             </form>
             <style jsx>{`
                 .CrearCuenta h1 {
