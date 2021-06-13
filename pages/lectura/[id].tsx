@@ -67,16 +67,21 @@ const PaginaLectura = () => {
                 }) : <p>No hay comentarios</p>}
             </ul>
             <style jsx>{`
-                .PaginaLectura p {
+                .PaginaLectura {
+                    max-width: 768px;
+                    margin: 0 auto;
                     font-size: 16px;
+                }
+                .PaginaLectura p {
                     margin: 0;
                 }
                 .PaginaLectura .imagenPortada {
                     width: 100%;
-                    height: 160px;
+                    height: 50%;
                     object-fit: cover;
                 }
                 .PaginaLectura .datos {
+                    padding: 0 8px;
                     display: grid;
                     grid-template-columns: 4fr 1fr;
                     grid-template-rows: 1fr 1fr;
@@ -106,18 +111,20 @@ const PaginaLectura = () => {
                     display: inline-block;
                     margin-left: 8px;
                     font-weight: bold;
-                    font-size: 16px;
+                    font-size: 1em;
                 }
                 .PaginaLectura h1 {
+                    padding: 0 8px;
                     margin: 8px 0;
-                    font-size: 24px;
+                    font-size: 1.5em;
                 }
                 .PaginaLectura h2 {
-                    font-size: 16px;
+                    padding: 0 8px;
+                    font-size: 1em;
                 }
                 .PaginaLectura ul {
                     margin: 0;
-                    padding: 0;
+                    padding: 0 8px;
                 }
                 .PaginaLectura li {
                     list-style-type: none;
@@ -133,7 +140,17 @@ const PaginaLectura = () => {
                     display: inline-block;
                     margin-left: 8px;
                     font-weight: bold;
-                    font-size: 16px;
+                    font-size: 1em;
+                }
+                @media only screen and (min-width: 376px) {
+                    .PaginaLectura {
+                        font-size: 18px;
+                    }
+                }
+                @media only screen and (min-width: 769px) {
+                    .PaginaLectura {
+                        font-size: 20px;
+                    }
                 }
             `}</style>
         </div>
