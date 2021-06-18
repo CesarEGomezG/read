@@ -12,13 +12,17 @@ const BarraSuperior = ({ urlFotoPerfil }: IPropsBarraSuperior) => {
                 <Link href="/">
                     <h2 className="nombreApp">Read</h2>
                 </Link>
+                <div className="buscador">
+                    <input type="text" placeholder="Buscar..." />
+                    <input type="button" value="Buscar" />
+                </div>
             </div>
             <div className="derecha">
                 <Link href="/">
                     <img className="fotoPerfil" src={urlFotoPerfil} alt="Foto de perfil del usuario" />
                 </Link>
                 <Link href="/">
-                    <img className="botonMenu" src={urlFotoPerfil} alt="Boton del menu desplegable" />
+                    <img className="botonMenu" src={"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png"} alt="Boton del menu desplegable" />
                 </Link>
             </div>
             <style jsx>{`
@@ -36,6 +40,16 @@ const BarraSuperior = ({ urlFotoPerfil }: IPropsBarraSuperior) => {
                 .BarraSuperior .izquierda .nombreApp {
                     margin: 0;
                     margin-left: 8px;
+                }
+                .BarraSuperior .izquierda .buscador {
+                    margin-left: 8px;
+                }
+                .BarraSuperior .izquierda .buscador * {
+                    border-radius: 4px;
+                    padding: 4px 6px;
+                }
+                .BarraSuperior .izquierda .buscador input[type="text"] {
+                    width: 160px;
                 }
                 .BarraSuperior .derecha {
                     display: flex;
