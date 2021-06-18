@@ -1,19 +1,24 @@
 import { MongoClient, ObjectId } from "mongodb";
 import config from "../config";
 
-const contraseniaMongo = encodeURIComponent(config.contraseniaMongo);
-const nombreBaseDatos = config.nombreBaseDatos;
-
-const urlConexion = `mongodb+srv://db_user_general:${contraseniaMongo}@helloworld.56p3x.mongodb.net/${nombreBaseDatos}?retryWrites=true&w=majority`;
-
 class LibMongo {
     cliente = null
     nombreBD = null
     static conexion = null
 
-    constructor() {
-        this.cliente = new MongoClient(urlConexion, { useNewUrlParser: true, useUnifiedTopology: true });
-        this.nombreBD = nombreBaseDatos;
+    constructor(nombreBaseDatos?: string, contraseniaMongo?: string) {
+        if(nombreBaseDatos && contraseniaMongo) {
+            contraseniaMongo = encodeURIComponent(contraseniaMongo);
+            const urlConexion = `mongodb+srv://db_user_general:${contraseniaMongo}@helloworld.56p3x.mongodb.net/${nombreBaseDatos}?retryWrites=true&w=majority`;
+            this.cliente = new MongoClient(urlConexion, { useNewUrlParser: true, useUnifiedTopology: true });
+            this.nombreBD = nombreBaseDatos;
+        } else {
+            nombreBaseDatos = config.nombreBaseDatos;
+            contraseniaMongo = encodeURIComponent(config.contraseniaMongo);
+            const urlConexion = `mongodb+srv://db_user_general:${contraseniaMongo}@helloworld.56p3x.mongodb.net/${nombreBaseDatos}?retryWrites=true&w=majority`;
+            this.cliente = new MongoClient(urlConexion, { useNewUrlParser: true, useUnifiedTopology: true });
+            this.nombreBD = nombreBaseDatos;
+        }
     }
 
     conectar() {
@@ -21,8 +26,6 @@ class LibMongo {
             LibMongo.conexion = new Promise((resolve, reject) => {
                 this.cliente.connect(err => {
                     if(err) reject(err);
-
-                    console.log("Se ha conectado a mongo con exito");
                     resolve(this.cliente.db(this.nombreBD));
                 });
             });
@@ -31,11 +34,11 @@ class LibMongo {
         return LibMongo.conexion;
     }
 
-    obtener(coleccion, consulta) {
+    /*obtener(coleccion, consulta) {
         return this.conectar().then(db => {
             return db.collection(coleccion).find(consulta).toArray();
         });
-    }
+    }*/
 
     obtenerPorId(coleccion, id) {
         return this.conectar().then(db => {
