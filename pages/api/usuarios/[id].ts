@@ -6,7 +6,7 @@ import { funcionExisteUsuario } from ".";
 const eliminarUsuario = async (req: NextApiRequest, res: NextApiResponse) => {
     const { id: textoIdUsuario } = req.query;
     if(textoIdUsuario) {
-        const idUsuario = parseInt(textoIdUsuario as string);
+        const idUsuario = textoIdUsuario as string;
         const mongo = new LibMongo();
         if(await funcionExisteUsuario(idUsuario) === true) {
             await mongo.eliminar("Usuarios", idUsuario);
