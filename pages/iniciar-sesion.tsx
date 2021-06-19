@@ -1,71 +1,113 @@
 import React, { useState, useRef } from "react";
+import Link from "next/link";
 import Axios from "axios";
 
 import config from "../config";
 
 const IniciarSesion = () => {
-    const [correo, setCorreo] = useState<string>("");
+    const [nombreUsuario, setNombreUsuario] = useState<string>("");
     const [contrasenia, setContrasenia] = useState<string>("");
 
-    const campoCorreo = useRef(null);
+    const campoNombreUsuario = useRef(null);
     const campoContrasenia = useRef(null);
 
-    const cambioCorreo = () => {
-        setCorreo(campoCorreo.current.value);
-    }
-
-    const cambioContrasenia = () => {
-        setContrasenia(campoContrasenia.current.value);
+    const cambioInput = (refCampo, modificadorEstado) => {
+        modificadorEstado(refCampo.current.value);
     }
 
     const iniciarSesion = async (evento) => {
         evento.preventDefault();
-        const respuesta = await Axios.post(config.urlApi + "/autenticacion/iniciar-sesion", {
-            tipo: "correo",
-            correo,
+        await Axios.post(config.urlApi + "/autenticacion/iniciar-sesion", {
+            tipo: "nombreUsuario",
+            nombreUsuario,
             contrasenia
         });
-        console.log(respuesta);
     }
 
     return (
         <div className="IniciarSesion">
-            <h1>Iniciar sesión</h1>
+            <h1>Read</h1>
+            <p className="inicioSesion">Iniciar sesión</p>
+            <div className="botonGoogle">
+                <img src="/images/logoGoogle.png" />
+                <p>Iniciar sesión con Google</p>
+            </div>
+            <p className="oIniciaSesionCon">O inicia sesión con:</p>
             <form onSubmit={iniciarSesion}>
-                <label>
-                    <span>Correo electrónico:</span>
-                    <input type="text" ref={campoCorreo} onChange={cambioCorreo} />
-                </label>
-                <label>
-                    <span>Contraseña:</span>
-                    <input type="password" ref={campoContrasenia} onChange={cambioContrasenia} />
-                </label>
-                <button>Iniciar sesión</button>
+                <input className="campo" type="text" placeholder="Nombre de usuario" ref={campoNombreUsuario} onChange={() => cambioInput(campoNombreUsuario, setNombreUsuario)} />
+                <input className="campo" type="password" placeholder="Contraseña" ref={campoContrasenia} onChange={() => cambioInput(campoContrasenia, setContrasenia)} />
+                <button disabled={nombreUsuario.length === 0 || contrasenia.length === 0}>Iniciar sesión</button>
             </form>
+            <div className="crearCuenta">
+                <span>¿No tienes cuenta? </span>
+                <Link href="/crear-cuenta">Registrate</Link>
+            </div>
             <style jsx>{`
+                .IniciarSesion {
+                    max-width: 425px;
+                    margin: 40px auto 40px auto;
+                }
                 .IniciarSesion h1 {
-                    margin: 20px 0 16px 0;
+                    font-size: 36px;
+                    margin: 20px 0 0 0;
                     text-align: center;
                 }
-                .IniciarSesion label * {
-                    margin: 0 auto;
+                .IniciarSesion .inicioSesion {
+                    font-size: 20px;
                     text-align: center;
-                    display: block;
+                    margin: 0 0 32px 0;
                 }
-                .IniciarSesion label span {
-                    margin-bottom: 4px;
+                .IniciarSesion .botonGoogle {
+                    margin: 0 auto 20px auto;
+                    width: 280px;
+                    height: 28px;
+                    padding: 2px 0;
+                    color: black;
+                    background-color: white;
+                    border: 1px solid black;
+                    border-radius: 4px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
-                .IniciarSesion label input[type="text"], .IniciarSesion label input[type="password"] {
-                    width: 240px;
-                    padding: 4px 8px;
-                    margin-bottom: 20px;
+                .IniciarSesion .botonGoogle img {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 4px;
+                }
+                .IniciarSesion .oIniciaSesionCon {
+                    text-align: center;
+                    margin: 0 0 20px 0;
+                }
+                .IniciarSesion form {
+                    text-align: center;
+                    margin: 0 0 36px 0;
+                }
+                .IniciarSesion form .campo {
+                    display: inline-block;
+                    text-align: center;
+                    width: 280px;
+                    height: 28px;
+                    margin: 0 auto 16px auto;
+                    padding: 2px 0;
                     border-radius: 4px;
                 }
-                .IniciarSesion input[type="button"] {
+                .IniciarSesion form button {
                     padding: 6px 12px;
                     display: block;
-                    margin: 32px auto 0 auto;
                     border-radius: 4px;
+                    margin: 12px auto 0 auto;
+                }
+                .IniciarSesion .crearCuenta {
+                    text-align: center;
+                    margin: 0 0 32px 0;
+                }
+
+                @media only screen and (min-width: 426px) {
+                    .IniciarSesion {
+                        border: 1px solid gray;
+                        border-radius: 4px;
+                    }
                 }
             `}</style>
         </div>

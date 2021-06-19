@@ -1,11 +1,9 @@
 import { AppProps } from 'next/app'
-import BarraSuperior from "../components/BarraSuperior";
 import "../styles.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
-            <BarraSuperior urlFotoPerfil={"https://upload.wikimedia.org/wikipedia/commons/a/a8/Bill_Gates_2017_%28cropped%29.jpg"} />
             <Component {...pageProps} />
         </>
     )
