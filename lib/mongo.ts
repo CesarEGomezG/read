@@ -58,7 +58,7 @@ class LibMongo {
         })
     }
 
-    crear(coleccion, datos) {
+    crear(coleccion: string, datos: any): string {
         return this.conectar().then(db => {
             return db.collection(coleccion).insertOne(datos);
         }).then(resultado => resultado.insertedId);

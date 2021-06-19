@@ -3,14 +3,15 @@ import { ObjectId } from "mongodb";
 import LibMongo from "../../../lib/mongo";
 
 export const funcionExisteUsuario: (id: string) => Promise<boolean> = async (id) => {
-    const mongo = new LibMongo();
+    let mongo = new LibMongo();
     const usuario = await mongo.obtenerUnoPorFiltro("Usuarios", { _id: ObjectId(id) });
+    mongo = null;
     if(usuario !== null) return true;
     else return false;
 };
 
 interface IFuncionCrearUsuario {
-    (nombres: string[], apellidos: string[], fechaNacimiento: string, nombreUsuario: string, correo: string, contraseniaHasheada: string): Promise<any>;
+    (nombres: string[], apellidos: string[], fechaNacimiento: string, nombreUsuario: string, correo: string, contraseniaHasheada: string): Promise<string>;
 }
 
 export const funcionCrearUsuario: IFuncionCrearUsuario = async (nombres, apellidos, fechaNacimiento, nombreUsuario, correo, contraseniaHasheada) => {

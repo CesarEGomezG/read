@@ -3,7 +3,7 @@ import LibMongo from "../../../../lib/mongo";
 
 const metodoGet = async (req: NextApiRequest, res: NextApiResponse) => {
     const libMongo = new LibMongo();
-    const resultados = await libMongo.obtener("Lecturas", {});
+    const resultados = await libMongo.obtenerPorFiltro("Lecturas", {});
     res.status(200).json(resultados);
 }
 

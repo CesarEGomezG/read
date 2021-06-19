@@ -12,7 +12,7 @@ const crearCuentaCorreo = async (req: NextApiRequest, res: NextApiResponse) => {
         const correo: string = textoCorreo.toLowerCase();
         const contraseniaHasheada: string = await bcrypt.hash(contrasenia, 10);
         try {
-            const idUsuario: number = await funcionCrearUsuario(nombres, apellidos, fechaNacimiento, nombreUsuario, correo, contraseniaHasheada);
+            const idUsuario: string = await funcionCrearUsuario(nombres, apellidos, fechaNacimiento, nombreUsuario, correo, contraseniaHasheada);
             res.status(201).send({ mensaje: "Cuenta creada", idUsuario });
         } catch(error) {
             console.log(`[ERROR] ${error.message}`);
@@ -22,7 +22,7 @@ const crearCuentaCorreo = async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 const crearCuenta = (req: NextApiRequest, res: NextApiResponse) => {
-    if(req.method === "POST" && req.body.tipo === "correo") crearCuentaCorreo(req, res);
+    if(req.method === "POST" && req.query.tipo === "correo") crearCuentaCorreo(req, res);
     else res.status(404).send({ error: "Algo salio mal" });
 }
 
