@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 
 import BarraSuperior from "../../components/BarraSuperior";
+import ContenedorLecturas from "../../components/ContenedorLecturas";
 
 import ILecturaCompleto from "../../interfaces/ILecturaCompleto";
 
 import mockLecturasCompleto from "../../mocks/lecturasCompleto";
+import mockLecturasBasico from "../../mocks/lecturasBasico";
 import mockComentarios from "../../mocks/comentarios";
 
 const PaginaLectura = () => {
@@ -22,7 +24,9 @@ const PaginaLectura = () => {
         <>
             <BarraSuperior />
             <div className="PaginaLectura">
-                <img className="imagenPortada" src={lectura ? lectura.imagen : ""} alt="Imagen de portada" />
+                <div className="contenedorPortada">
+                    <img className="imagenPortada" src={lectura ? lectura.imagen : ""} alt="Imagen de portada" />
+                </div>
                 <h1>{lectura ? lectura.titulo : ""}</h1>
                 <div className="datos">
                     <div className="blog">
@@ -65,11 +69,13 @@ const PaginaLectura = () => {
                                     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Bill_Gates_2017_%28cropped%29.jpg" alt="Foto del usuario" />
                                     <p>{`Usuario del id ${comentario.idUsuario}`}</p>
                                 </div>
-                                <p>{comentario.mensaje}</p>
+                                <p className="texto">{comentario.mensaje}</p>
                             </li>
                         )
                     }) : <p>No hay comentarios</p>}
                 </ul>
+                <h2>Lecturas relacionadas</h2>
+                <ContenedorLecturas relacionadas={false} lecturas={mockLecturasBasico} />
                 <style jsx>{`
                     .PaginaLectura {
                         max-width: 768px;
@@ -78,10 +84,18 @@ const PaginaLectura = () => {
                     }
                     .PaginaLectura p {
                         margin: 0;
+                        line-height: 1.4em;
                     }
-                    .PaginaLectura .imagenPortada {
+                    .PaginaLectura .contenedorPortada {
                         width: 100%;
-                        height: 50%;
+                        padding-top: 50%;
+                        position: relative;
+                    }
+                    .PaginaLectura .contenedorPortada .imagenPortada {
+                        position: absolute;
+                        top: 0px;
+                        width: 100%;
+                        height: 100%;
                         object-fit: cover;
                     }
                     .PaginaLectura .datos {
@@ -119,12 +133,13 @@ const PaginaLectura = () => {
                     }
                     .PaginaLectura h1 {
                         padding: 0 8px;
-                        margin: 8px 0;
+                        margin: 12px 0;
                         font-size: 1.5em;
                     }
                     .PaginaLectura h2 {
+                        margin: 16px 0 8px 0;
                         padding: 0 8px;
-                        font-size: 1em;
+                        font-size: 1.25em;
                     }
                     .PaginaLectura ul {
                         margin: 0;
@@ -133,6 +148,17 @@ const PaginaLectura = () => {
                     .PaginaLectura li {
                         list-style-type: none;
                         margin-bottom: 12px;
+                    }
+                    .PaginaLectura .comentario {
+                        border: 1px solid black;
+                        border-radius: 4px;
+                        padding: 8px;
+                    }
+                    .PaginaLectura .comentario .usuario {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        margin-bottom: 4px;
                     }
                     .PaginaLectura .comentario .usuario img {
                         width: 28px;

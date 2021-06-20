@@ -23,7 +23,7 @@ const BarraSuperior = () => {
             </div>
             <style jsx>{`
                 .BarraSuperior {
-                    padding: 0 24px;
+                    padding: 0 16px;
                     background-color: lightblue;
                     height: 56px;
                     display: flex;
@@ -35,7 +35,7 @@ const BarraSuperior = () => {
                 }
                 .BarraSuperior .izquierda .nombreApp {
                     margin: 0;
-                    font-size: 32px;
+                    font-size: 28px;
                 }
                 .BarraSuperior .buscador {
                     display: none;
