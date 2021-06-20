@@ -23,19 +23,20 @@ const ContenedorLecturas = ({ titulo, lecturas }: IPropsContenedorLecturas) => {
                 }
             </ul>
             <style jsx>{`
+                .ContenedorLecturas {
+                    margin: 0 20px;
+                }
+                .ContenedorLecturas h2 {
+                    margin: 12px 4px 8px 4px;
+                }
                 ul {
+                    margin: 0;
                     padding: 0;
                     display: grid;
                     grid-template-columns: 1fr;
                 }
                 li {
                     list-style-type: none;
-                }
-                .ContenedorLecturas {
-                    width: 100%;
-                }
-                .ContenedorLecturas h2 {
-                    margin: 0;
                 }
                 
                 @media only screen and (min-width: 426px) {

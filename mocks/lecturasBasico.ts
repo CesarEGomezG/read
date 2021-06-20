@@ -9,7 +9,7 @@ const lecturasBasico: ILecturasBasico[] = [
     },
     {
         id: 1,
-        titulo: "10 mensajes que pueden cambiar tu vida para siempre | Master Muñoz",
+        titulo: "10 mensajes que pueden cambiar tu vida para siempre | Master Muñoz. Recomendaciones de Emprendimiento",
         imagen: "https://i.ytimg.com/vi/7-EgMyOqbbw/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCLNRdpOPgpQoutPTiJkJBDaPtd0Q",
         idBlog: 1
     },
@@ -27,7 +27,7 @@ const lecturasBasico: ILecturasBasico[] = [
     },
     {
         id: 4,
-        titulo: "Personas que les gustan muchas carreras y no saben que carrera estudiar",
+        titulo: "Personas que les gustan muchas carreras y no saben que carrera estudiar. Este video es la mejor opción para ti. Estoy poniendo texto de relleno, no hay de otra.",
         imagen: "https://i.ytimg.com/vi/e9-XzXpGdFY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAHwa6aQi20LZ2WRMzLJGbHIlybXg",
         idBlog: 4
     },
