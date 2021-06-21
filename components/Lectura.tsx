@@ -19,7 +19,7 @@ const Lectura = ({ lectura }: IPropsLectura) => {
             </Link>
             <Link href={`/blog/${lectura.idBlog}`}>
                 <div className="parteBlog">
-                    <img src={"https://media-exp1.licdn.com/dms/image/C4E03AQHMhlh-FBjnsw/profile-displayphoto-shrink_200_200/0/1621547009189?e=1629331200&v=beta&t=sOmlegtx8r1473BeQlAFPmXQde-dhJLpAx_1DOyG_MA"} alt="Imagen del blog" />
+                    <img src={"https://media-exp1.licdn.com/dms/image/C4E03AQH_x3mmyCFW_w/profile-displayphoto-shrink_200_200/0/1624242119528?e=1629936000&v=beta&t=bzeOG3eJr6FHpvqivwMLQJHoX0pa1SFvAwODcw-GRwM"} alt="Imagen del blog" />
                     <p className="nombreBlog">Blog {lectura.idBlog}</p>
                 </div>
             </Link>

@@ -57,8 +57,8 @@ const lecturasCompleto: ILecturasCompleto[] = [
     },
     {
         id: 3,
-        titulo: "Regreso a clases presenciales en 24 mil escuelas de México - En Punto",
-        imagen: "https://i.ytimg.com/vi/Ii2a1aApn0c/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCCdBUymopYTFU1tiyUEimS8wX-Ow",
+        titulo: "La empresa latinoamericana valorada en US $3.000 millones | Caso Rappi",
+        imagen: "https://i.ytimg.com/vi/Nw1M6lQXwIo/maxresdefault.jpg",
         idBlog: 3,
         bloques: [
             {
@@ -129,8 +129,8 @@ const lecturasCompleto: ILecturasCompleto[] = [
     },
     {
         id: 7,
-        titulo: "Por qué Linux es mejor para programar",
-        imagen: "https://i.ytimg.com/vi/_VG7WIzD7W4/sddefault.jpg",
+        titulo: "Curso de Javascript en 40 minutos",
+        imagen: "https://i.ytimg.com/vi/zBk-Hyv6ykw/maxresdefault.jpg",
         idBlog: 7,
         bloques: [
             {
@@ -183,8 +183,8 @@ const lecturasCompleto: ILecturasCompleto[] = [
     },
     {
         id: 10,
-        titulo: "titulo de la lectura 10",
-        imagen: "https://cybermexico.mx/wp-content/uploads/2020/06/Rectori%CC%81a-Mty-Tec-2.jpg",
+        titulo: "21 formas de organizarte y poner tu vida en orden en 2021. Tips de organización y productividad",
+        imagen: "https://i.ytimg.com/vi/Ed2fkX5xdko/maxresdefault.jpg",
         idBlog: 10,
         bloques: [
             {
@@ -196,25 +196,7 @@ const lecturasCompleto: ILecturasCompleto[] = [
                 id: 1,
                 tipo: "parrafo",
                 contenido: "Hice demasiados cursos que siento que batallo para retener toda la información de ellos. Por eso quiero realizar este proyecto personal para poner en pracrtica todo el contenido que vi en los cursos y asi retener mejor en mi mente los conocimientos."
-            }
-        ]
-    },
-    {
-        id: 11,
-        titulo: "titulo de la lectura 11",
-        imagen: "https://cybermexico.mx/wp-content/uploads/2020/06/Rectori%CC%81a-Mty-Tec-2.jpg",
-        idBlog: 11,
-        bloques: [
-            {
-                id: 0,
-                tipo: "parrafo",
-                contenido: "Esto es un parrafo de prueba y no se que escribir para que quede mucho texto, asi que voy a poner cualquier cosa que se me ocurra. Espero poder alcanzar a terminar esta aplicación para antes del 9 de agusto de 2021, el dia que empiezo mi quinto semestre en el Tec de Monterrey."
             },
-            {
-                id: 1,
-                tipo: "parrafo",
-                contenido: "Hice demasiados cursos que siento que batallo para retener toda la información de ellos. Por eso quiero realizar este proyecto personal para poner en pracrtica todo el contenido que vi en los cursos y asi retener mejor en mi mente los conocimientos."
-            }
         ]
     }
 ];

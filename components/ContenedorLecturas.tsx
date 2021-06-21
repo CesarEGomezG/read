@@ -4,11 +4,10 @@ import Lectura from "../components/Lectura";
 
 interface IPropsContenedorLecturas {
     titulo?: string,
-    lecturas: ILecturaBasico[],
-    relacionadas?: boolean
+    lecturas: ILecturaBasico[]
 }
 
-const ContenedorLecturas = ({ titulo, lecturas, relacionadas }: IPropsContenedorLecturas) => {
+const ContenedorLecturas = ({ titulo, lecturas }: IPropsContenedorLecturas) => {
     return (
         <div className="ContenedorLecturas">
             <h2>{titulo}</h2>
@@ -22,80 +21,56 @@ const ContenedorLecturas = ({ titulo, lecturas, relacionadas }: IPropsContenedor
                         );
                     })
                 }
-            </ul>
-            {
-                relacionadas ?
-                    <style jsx>{`
-                        .ContenedorLecturas {
-                            width: 768px;
-                        }
-                        .ContenedorLecturas h2 {
-                            margin: 12px 4px 8px 4px;
-                        }
+                {
+                    lecturas && lecturas.length === 0 &&
+                    <p className="mensajeVacio">Aqui se mostrarán las lecturas al cargar</p>
+                }
+            </ul> 
+                <style jsx>{`
+                    .ContenedorLecturas {
+                        margin: 0 12px;
+                    }
+                    .ContenedorLecturas h2 {
+                        margin: 12px 4px 8px 4px;
+                    }
+                    .ContenedorLecturas ul {
+                        margin: 0;
+                        padding: 0;
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        overflow: hidden;
+                    }
+                    .ContenedorLecturas li {
+                        list-style-type: none;
+                    }
+                    .ContenedorLecturas ul .mensajeVacio {
+                        margin: 0;
+                    }
+                    
+                    @media only screen and (min-width: 426px) {
                         .ContenedorLecturas ul {
-                            margin: 0;
-                            padding: 0;
-                            display: grid;
-                            grid-template-columns: 1fr;
-                            overflow: hidden;
+                            grid-template-columns: 1fr 1fr;
                         }
-                        .ContenedorLecturas li {
-                            list-style-type: none;
+                    }
+                    @media only screen and (min-width: 626px) {
+                        ContenedorLecturas ul {
+                            grid-template-columns: 1fr 1fr 1fr;
                         }
-                        
-                        @media only screen and (min-width: 426px) {
-                            -ContenedorLecturas ul {
-                                grid-template-columns: 1fr 1fr;
-                            }
-                        }
-                        @media only screen and (min-width: 626px) {
-                            .ContenedorLecturas ul {
-                                grid-template-columns: 1fr 1fr 1fr;
-                            }
-                        }
-                    `}</style> : 
-                    <style jsx>{`
-                        .ContenedorLecturas {
-                            margin: 0 12px;
-                        }
-                        .ContenedorLecturas h2 {
-                            margin: 12px 4px 8px 4px;
-                        }
+                    }
+                    @media only screen and (min-width: 826px) {
                         .ContenedorLecturas ul {
-                            margin: 0;
-                            padding: 0;
-                            display: grid;
-                            grid-template-columns: 1fr;
-                            overflow: hidden;
+                            grid-template-columns: 1fr 1fr 1fr 1fr;
                         }
-                        .ContenedorLecturas li {
-                            list-style-type: none;
+                    }
+                    @media only screen and (min-width: 1026px) {
+                        .ContenedorLecturas ul {
+                            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
                         }
-                        
-                        @media only screen and (min-width: 426px) {
-                            .ContenedorLecturas ul {
-                                grid-template-columns: 1fr 1fr;
-                            }
-                        }
-                        @media only screen and (min-width: 626px) {
-                            ContenedorLecturas ul {
-                                grid-template-columns: 1fr 1fr 1fr;
-                            }
-                        }
-                        @media only screen and (min-width: 826px) {
-                            .ContenedorLecturas ul {
-                                grid-template-columns: 1fr 1fr 1fr 1fr;
-                            }
-                        }
-                        @media only screen and (min-width: 1026px) {
-                            .ContenedorLecturas ul {
-                                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-                            }
-                        }
-                    `}</style>
-            }
+                    }
+                `}</style>
         </div>
     );
 };
 
 export default ContenedorLecturas;
+

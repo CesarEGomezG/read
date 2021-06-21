@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 
 import BarraSuperior from "../../components/BarraSuperior";
-import ContenedorLecturas from "../../components/ContenedorLecturas";
+import LecturasRelacionadas from "../../components/LecturasRelacionadas";
 
 import ILecturaCompleto from "../../interfaces/ILecturaCompleto";
 
@@ -75,7 +75,7 @@ const PaginaLectura = () => {
                     }) : <p>No hay comentarios</p>}
                 </ul>
                 <h2>Lecturas relacionadas</h2>
-                <ContenedorLecturas relacionadas={false} lecturas={mockLecturasBasico} />
+                <LecturasRelacionadas lecturas={mockLecturasBasico} />
                 <style jsx>{`
                     .PaginaLectura {
                         max-width: 768px;

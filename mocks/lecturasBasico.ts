@@ -21,8 +21,8 @@ const lecturasBasico: ILecturasBasico[] = [
     },
     {
         id: 3,
-        titulo: "Regreso a clases presenciales en 24 mil escuelas de México - En Punto",
-        imagen: "https://i.ytimg.com/vi/Ii2a1aApn0c/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCCdBUymopYTFU1tiyUEimS8wX-Ow",
+        titulo: "La empresa latinoamericana valorada en US $3.000 millones | Caso Rappi",
+        imagen: "https://i.ytimg.com/vi/Nw1M6lQXwIo/maxresdefault.jpg",
         idBlog: 3
     },
     {
@@ -45,8 +45,8 @@ const lecturasBasico: ILecturasBasico[] = [
     },
     {
         id: 7,
-        titulo: "Por qué Linux es mejor para programar",
-        imagen: "https://i.ytimg.com/vi/_VG7WIzD7W4/sddefault.jpg",
+        titulo: "Curso de Javascript en 40 minutos",
+        imagen: "https://i.ytimg.com/vi/zBk-Hyv6ykw/maxresdefault.jpg",
         idBlog: 7
     },
     {
@@ -60,6 +60,12 @@ const lecturasBasico: ILecturasBasico[] = [
         titulo: "Mi rutina diaria en Estados Unidos | Martín Tena",
         imagen: "https://i.ytimg.com/vi/LyL25i5Kz20/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBKDhKPW_jvxAGS_dQ2HhJZij4xXw",
         idBlog: 9
+    },
+    {
+        id: 10,
+        titulo: "21 formas de organizarte y poner tu vida en orden en 2021. Tips de organización y productividad",
+        imagen: "https://i.ytimg.com/vi/Ed2fkX5xdko/maxresdefault.jpg",
+        idBlog: 10
     }
 ];
 
