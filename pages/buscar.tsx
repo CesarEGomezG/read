@@ -10,9 +10,15 @@ const Buscar = () => {
     return (
         <>
             <BarraSuperior />
+            <div className="espacioBarraSuperior"></div>
             <div>
                 <ContenedorLecturas titulo={"Resultados de la búsqueda:"} lecturas={[]} />
             </div>
+            <style jsx>{`
+                .espacioBarraSuperior {
+                    margin-bottom: 68px;
+                }
+            `}</style>
         </>
     )
 }

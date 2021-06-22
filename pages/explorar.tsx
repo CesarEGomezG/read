@@ -57,6 +57,7 @@ const Explorar = () => {
         <>
             <BarraSuperior />
             <div className="Explorar">
+                <div className="espacioBarraSuperior"></div>
                 <div className="tipos">
                     <div className="tipo">
                         <b><p className="nombre">Todo</p></b>
@@ -87,8 +88,11 @@ const Explorar = () => {
                     }
                 </div>
                 <style jsx>{`
+                    .espacioBarraSuperior {
+                        margin-bottom: 56px;
+                    }
                     .Explorar {
-                        padding: 16px 12px;
+                        padding: 12px;
                     }
                     .Explorar .tipos {
                         max-width: 768px;

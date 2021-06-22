@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import BarraSuperior from "../../components/BarraSuperior";
@@ -24,15 +25,18 @@ const PaginaLectura = () => {
         <>
             <BarraSuperior />
             <div className="PaginaLectura">
+                <div className="espacioBarraSuperior"></div>
                 <div className="contenedorPortada">
                     <img className="imagenPortada" src={lectura ? lectura.imagen : ""} alt="Imagen de portada" />
                 </div>
                 <h1>{lectura ? lectura.titulo : ""}</h1>
                 <div className="datos">
-                    <div className="blog">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Bill_Gates_2017_%28cropped%29.jpg" alt="Foto del blog" />
-                        <p>{lectura ? `Blog del id ${lectura.idBlog}` : ""}</p>
-                    </div>
+                    <Link href={`/blog/${lectura && lectura.idBlog || 0}`}>
+                        <div className="blog">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Bill_Gates_2017_%28cropped%29.jpg" alt="Foto del blog" />
+                            <p>{lectura ? `Blog del id ${lectura.idBlog}` : ""}</p>
+                        </div>
+                    </Link>
                     <input className="suscribir" type="button" value="Suscribir" />
                     <span>23 de noviembre de 2021 a las 23:59</span>
                     <span className="calificacion">94/100</span>
@@ -65,10 +69,12 @@ const PaginaLectura = () => {
                     {comentarios ? comentarios.map(comentario => {
                         return (
                             <li className="comentario" key={comentario.id}>
-                                <div className="usuario">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Bill_Gates_2017_%28cropped%29.jpg" alt="Foto del usuario" />
-                                    <p>{`Usuario del id ${comentario.idUsuario}`}</p>
-                                </div>
+                                <Link href={`/usuario/${0}`}>
+                                    <div className="usuario">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Bill_Gates_2017_%28cropped%29.jpg" alt="Foto del usuario" />
+                                        <p>{`Usuario del id ${comentario.idUsuario}`}</p>
+                                    </div>
+                                </Link>
                                 <p className="texto">{comentario.mensaje}</p>
                             </li>
                         )
@@ -77,6 +83,9 @@ const PaginaLectura = () => {
                 <h2>Lecturas relacionadas</h2>
                 <LecturasRelacionadas lecturas={mockLecturasBasico} />
                 <style jsx>{`
+                    .espacioBarraSuperior {
+                        margin-bottom: 56px;
+                    }
                     .PaginaLectura {
                         max-width: 768px;
                         margin: 0 auto;

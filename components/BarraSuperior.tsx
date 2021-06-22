@@ -23,6 +23,11 @@ const BarraSuperior = () => {
                         height: 56px;
                         display: grid;
                         grid-template-columns: 36px 1fr;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        z-index: 1;
                     }
                     .BarraSuperior img {
                         width: 32px;
@@ -53,17 +58,14 @@ const BarraSuperior = () => {
                 </Link>
             </div>
             <div className="derecha">
-                <Link href="/">
-                    <img className="fotoPerfil" src={"https://media-exp1.licdn.com/dms/image/C4E03AQH_x3mmyCFW_w/profile-displayphoto-shrink_200_200/0/1624242119528?e=1629936000&v=beta&t=bzeOG3eJr6FHpvqivwMLQJHoX0pa1SFvAwODcw-GRwM"} alt="Foto de perfil del usuario" />
-                </Link>
                 <Link href="/explorar">
                     <img className="botonExplorar" src="/iconoExplorar.png" alt="Boton para explorar" />
                 </Link>
                 <Link href="/buscar">
                     <img className="botonBuscar" src="/iconoBuscar.png" alt="Boton para buscar" onClick={() => setBusqueda(true)} />
                 </Link>
-                <Link href="/">
-                    <img className="botonMenu" src="/iconoMenu.png" alt="Boton del menu desplegable" />
+                <Link href="/usuario/0">
+                    <img className="fotoPerfil" src={"https://media-exp1.licdn.com/dms/image/C4E03AQH_x3mmyCFW_w/profile-displayphoto-shrink_200_200/0/1624242119528?e=1629936000&v=beta&t=bzeOG3eJr6FHpvqivwMLQJHoX0pa1SFvAwODcw-GRwM"} alt="Foto de perfil del usuario" />
                 </Link>
             </div>
             <style jsx>{`
@@ -73,6 +75,11 @@ const BarraSuperior = () => {
                     height: 56px;
                     display: flex;
                     justify-content: space-between;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    z-index: 1;
                 }
                 .BarraSuperior .izquierda {
                     display: flex;
@@ -99,14 +106,7 @@ const BarraSuperior = () => {
                     display: flex;
                     align-items: center;
                 }
-                .BarraSuperior .derecha .fotoPerfil {
-                    width: 32px;
-                    height: 32px;
-                    object-fit: cover;
-                    border-radius: 50%;
-                }
                 .BarraSuperior .derecha .botonExplorar {
-                    margin-left: 12px;
                     width: 32px;
                     height: 32px;
                     border-radius: 50%;
@@ -117,11 +117,12 @@ const BarraSuperior = () => {
                     height: 32px;
                     border-radius: 50%;
                 }
-                .BarraSuperior .derecha .botonMenu {
-                    margin-left: 12px;
+                .BarraSuperior .derecha .fotoPerfil {
                     width: 32px;
                     height: 32px;
                     object-fit: cover;
+                    border-radius: 50%;
+                    margin-left: 12px;
                 }
 
                 @media only screen and (min-width: 680px) {
