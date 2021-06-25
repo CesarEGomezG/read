@@ -3,18 +3,30 @@ import Router from "next/router"
 import Link from "next/link";
 
 const BarraSuperior = () => {
-    const [busqueda, setBusqueda] = useState(false);
+    const [mostrarModal, setMostrarModal] = useState(false);
+    const [mostrarBusqueda, setMostrarBusqueda] = useState(false);
     useEffect(() => {
         if(Router.route.startsWith("/buscar") && document.querySelector("body #__next .BarraSuperior").scrollWidth < 680) {
-            setBusqueda(true);
+            setMostrarBusqueda(true);
         } else {
-            setBusqueda(false);
+            setMostrarBusqueda(false);
+        }
+        let posicionScrollPrevia = window.pageYOffset;
+        window.onscroll = () => {
+            let posicionScrollActual = window.pageYOffset;
+            if(posicionScrollPrevia > posicionScrollActual) {
+                document.getElementById("BarraSuperior").style.top = "0";
+            } else if(posicionScrollPrevia < posicionScrollActual && posicionScrollActual > 56) {
+                document.getElementById("BarraSuperior").style.top = "-56px";
+                setMostrarModal(false);
+            }
+            posicionScrollPrevia = posicionScrollActual;
         }
     }, []);
-    if(busqueda) {
+    if(mostrarBusqueda) {
         return (
-            <div className="BarraSuperior">
-                <img src="/iconoRegresar.png" alt="Boton para regresar" onClick={() => setBusqueda(false)} />
+            <div id="BarraSuperior" className="BarraSuperior">
+                <img src="/iconoRegresar.png" alt="Boton para regresar" onClick={() => setMostrarBusqueda(false)} />
                 <input type="text" placeholder="Buscar..." autoFocus />
                 <style jsx>{`
                     .BarraSuperior {
@@ -46,28 +58,42 @@ const BarraSuperior = () => {
         )
     } else return (
         <>
-            <div className="BarraSuperior">
+            <div id="BarraSuperior" className="BarraSuperior">
                 <div className="izquierda">
                     <Link href="/">
                         <h2 className="nombreApp">Read</h2>
                     </Link>
-                </div>
-                <div className="buscador">
-                    <input type="text" placeholder="Buscar..." />
-                    <Link href="/buscar">
-                        <input type="button" value="Buscar" />
-                    </Link>
+                    <div className="buscador">
+                        <input type="text" placeholder="Buscar lecturas, blogs, secciones y más..." />
+                        <Link href="/buscar">
+                            <input type="button" value="Buscar" />
+                        </Link>
+                    </div>
                 </div>
                 <div className="derecha">
                     <Link href="/explorar">
-                        <img className="botonExplorar" src="/iconoExplorar.png" alt="Boton para explorar" />
+                        <p className="botonTexto">Explorar</p>
+                    </Link>
+                    <Link href="/suscripciones">
+                        <p className="botonTexto">Suscripciones</p>
+                    </Link>
+                    <Link href="/leer-despues">
+                        <p className="botonTexto">Leer después</p>
+                    </Link>
+                    <div className="lineaVertical"></div>
+                    <Link href="/leer-despues">
+                        <img className="botonIcono" src="/iconoLeerDespues.png" alt="Boton para ir a sección de Leer Después" />
+                    </Link>
+                    <Link href="/suscripciones">
+                        <img className="botonIconoCuadrado" src="/iconoSuscripciones.png" alt="Boton para ir a sección de Suscripciones" />
+                    </Link>
+                    <Link href="/explorar">
+                        <img className="botonIcono" src="/iconoExplorar.png" alt="Boton para ir a sección de Explorar" />
                     </Link>
                     <Link href="/buscar">
-                        <img className="botonBuscar" src="/iconoBuscar.png" alt="Boton para buscar" onClick={() => setBusqueda(true)} />
+                        <img className="botonIcono iconoBuscar" src="/iconoBuscar.png" alt="Boton para buscar" onClick={() => setMostrarBusqueda(true)} />
                     </Link>
-                    <Link href="/usuario/0">
-                        <img className="fotoPerfil" src={"https://media-exp1.licdn.com/dms/image/C4E03AQH_x3mmyCFW_w/profile-displayphoto-shrink_200_200/0/1624242119528?e=1629936000&v=beta&t=bzeOG3eJr6FHpvqivwMLQJHoX0pa1SFvAwODcw-GRwM"} alt="Foto de perfil del usuario" />
-                    </Link>
+                    <img className="fotoPerfil" src={"https://media-exp1.licdn.com/dms/image/C4E03AQH_x3mmyCFW_w/profile-displayphoto-shrink_200_200/0/1624242119528?e=1629936000&v=beta&t=bzeOG3eJr6FHpvqivwMLQJHoX0pa1SFvAwODcw-GRwM"} alt="Foto de perfil del usuario" onClick={() => setMostrarModal(!mostrarModal)} />
                 </div>
                 <style jsx>{`
                     .BarraSuperior {
@@ -81,6 +107,7 @@ const BarraSuperior = () => {
                         left: 0;
                         right: 0;
                         z-index: 1;
+                        transition: top 0.3s;
                     }
                     .BarraSuperior .izquierda {
                         display: flex;
@@ -90,16 +117,16 @@ const BarraSuperior = () => {
                         margin: 0;
                         font-size: 28px;
                     }
-                    .BarraSuperior .buscador {
+                    .BarraSuperior .izquierda .buscador {
                         display: none;
-                        margin: auto 0;
+                        margin: auto 0 auto 16px;
                     }
-                    .BarraSuperior .buscador input[type="text"] {
-                        width: 360px;
+                    .BarraSuperior .izquierda .buscador input[type="text"] {
+                        width: 280px;
                         font-size: 14px;
                         padding: 6px 8px;
                     }
-                    .BarraSuperior .buscador input[type="button"] {
+                    .BarraSuperior .izquierda .buscador input[type="button"] {
                         font-size: 14px;
                         padding: 6px 8px;
                     }
@@ -107,16 +134,29 @@ const BarraSuperior = () => {
                         display: flex;
                         align-items: center;
                     }
-                    .BarraSuperior .derecha .botonExplorar {
-                        width: 32px;
-                        height: 32px;
-                        border-radius: 50%;
+                    .BarraSuperior .derecha .botonTexto {
+                        display: none;
+                        margin: 0 8px 0 8px;
+                        font-size: 1em;
+                        font-weight: bold;
                     }
-                    .BarraSuperior .derecha .botonBuscar {
-                        margin-left: 12px;
+                    .BarraSuperior .derecha .lineaVertical {
+                        display: none;
+                        background-color: rgba(0, 0, 0, 0.25);
+                        width: 2px;
+                        height: 40px;
+                        margin-left: 4px;
+                    }
+                    .BarraSuperior .derecha .botonIcono {
                         width: 32px;
                         height: 32px;
                         border-radius: 50%;
+                        margin-left: 12px;
+                    }
+                    .BarraSuperior .derecha .botonIconoCuadrado {
+                        width: 30px;
+                        height: 30px;
+                        margin-left: 12px;
                     }
                     .BarraSuperior .derecha .fotoPerfil {
                         width: 32px;
@@ -126,59 +166,70 @@ const BarraSuperior = () => {
                         margin-left: 12px;
                     }
 
-                    @media only screen and (min-width: 680px) {
-                        .BarraSuperior .buscador {
+                    @media only screen and (min-width: 681px) {
+                        .BarraSuperior .izquierda .buscador {
                             display: flex;
                         }
-                        .BarraSuperior .derecha .botonExplorar {
+                        .BarraSuperior .derecha .iconoBuscar {
                             display: none;
                         }
-                        .BarraSuperior .derecha .botonBuscar {
+                    }
+                    @media only screen and (min-width: 819px) {
+                        .BarraSuperior .derecha .botonTexto {
+                            display: flex;
+                        }
+                        .BarraSuperior .derecha .lineaVertical {
+                            display: flex;
+                        }
+                        .BarraSuperior .derecha .botonIcono {
                             display: none;
                         }
-                        .BarraSuperior .derecha .botonMenu {
+                        .BarraSuperior .derecha .botonIconoCuadrado {
                             display: none;
                         }
                     }
                 `}</style>
             </div>
-            <div className="modal">
-                <p className="nombreUsuario">CesarEGomezG755</p>
-                <Link href={`/usuario/${"0"}`}>
-                    <p className="opcion">Ver mi perfil</p>
-                </Link>
-                <Link href="/configuracion">
-                    <p className="opcion">Configuración</p>
-                </Link>
-                <Link href="/iniciar-sesion">
-                    <p className="opcion ultimaOpcion">Cerrar sesión</p>
-                </Link>
-                <style jsx>{`
-                    .modal {
-                        width: 150px;
-                        padding: 8px 4px;
-                        position: fixed;
-                        top: 56px;
-                        right: 0;
-                        z-index: 1;
-                        background: white;
-                        border: 1px solid lightgray;
-                        border-radius: 2px;
-                    }
-                    .modal .nombreUsuario {
-                        margin: 0 0 8px 0;
-                        padding-bottom: 8px;
-                        border-bottom: 1px solid lightgray;
-                        font-weight: bold;
-                    }
-                    .modal .opcion {
-                        margin: 0 0 16px 0;
-                    }
-                    .modal .ultimaOpcion {
-                        margin: 0 0 4px 0;
-                    }
-                `}</style>
-            </div>
+            {
+                mostrarModal &&
+                <div className="modal">
+                    <p className="nombreUsuario">CesarEGomezG755</p>
+                    <Link href={`/usuario/${"0"}`}>
+                        <p className="opcion">Ver mi perfil</p>
+                    </Link>
+                    <Link href="/configuracion">
+                        <p className="opcion">Configuración</p>
+                    </Link>
+                    <Link href="/iniciar-sesion">
+                        <p className="opcion ultimaOpcion">Cerrar sesión</p>
+                    </Link>
+                    <style jsx>{`
+                        .modal {
+                            width: 150px;
+                            padding: 8px 4px;
+                            position: fixed;
+                            top: 56px;
+                            right: 0;
+                            z-index: 1;
+                            background: white;
+                            border: 1px solid lightgray;
+                            border-radius: 2px;
+                        }
+                        .modal .nombreUsuario {
+                            margin: 0 0 8px 0;
+                            padding-bottom: 8px;
+                            border-bottom: 1px solid lightgray;
+                            font-weight: bold;
+                        }
+                        .modal .opcion {
+                            margin: 0 0 16px 0;
+                        }
+                        .modal .ultimaOpcion {
+                            margin: 0 0 4px 0;
+                        }
+                    `}</style>
+                </div>
+            }
         </>
     );
 };

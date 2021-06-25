@@ -3,10 +3,11 @@ import Link from "next/link";
 import ILecturaBasico from "../interfaces/ILecturaBasico";
 
 interface IPropsLectura {
-    lectura: ILecturaBasico
+    lectura: ILecturaBasico,
+    pendiente?: boolean
 }
 
-const Lectura = ({ lectura }: IPropsLectura) => {
+const Lectura = ({ lectura, pendiente }: IPropsLectura) => {
     return (
         <div className="Lectura">
             <Link href={`/lectura/${lectura.id}`}>
@@ -23,6 +24,12 @@ const Lectura = ({ lectura }: IPropsLectura) => {
                     <p className="nombreBlog">Blog {lectura.idBlog}</p>
                 </div>
             </Link>
+            {
+                pendiente &&
+                <div className="partePendiente">
+                    <input type="button" value="Eliminar" />
+                </div>
+            }
             <style jsx>{`
                 .Lectura {
                     margin: 6px;
@@ -60,6 +67,11 @@ const Lectura = ({ lectura }: IPropsLectura) => {
                 .Lectura .parteBlog .nombreBlog {
                     font-size: 16px;
                     margin: 0;
+                }
+                .Lectura .partePendiente {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin: 6px 6px 2px 0;
                 }
             `}</style>
         </div>

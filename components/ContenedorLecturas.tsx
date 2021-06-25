@@ -4,10 +4,11 @@ import Lectura from "../components/Lectura";
 
 interface IPropsContenedorLecturas {
     titulo?: string,
-    lecturas: ILecturaBasico[]
+    lecturas: ILecturaBasico[],
+    pendientes?: boolean
 }
 
-const ContenedorLecturas = ({ titulo, lecturas }: IPropsContenedorLecturas) => {
+const ContenedorLecturas = ({ titulo, lecturas, pendientes }: IPropsContenedorLecturas) => {
     return (
         <div className="ContenedorLecturas">
             <h2>{titulo}</h2>
@@ -16,7 +17,7 @@ const ContenedorLecturas = ({ titulo, lecturas }: IPropsContenedorLecturas) => {
                     lecturas && lecturas.length > 0 && lecturas.map(lectura => {
                         return(
                             <li key={lectura.id}>
-                                <Lectura lectura={lectura} />
+                                <Lectura lectura={lectura} pendiente={pendientes} />
                             </li>
                         );
                     })

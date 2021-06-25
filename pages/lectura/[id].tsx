@@ -183,12 +183,12 @@ const PaginaLectura = () => {
                     }
                     @media only screen and (min-width: 376px) {
                         .PaginaLectura {
-                            font-size: 18px;
+                            font-size: 17px;
                         }
                     }
                     @media only screen and (min-width: 769px) {
                         .PaginaLectura {
-                            font-size: 20px;
+                            font-size: 18px;
                         }
                     }
                 `}</style>
