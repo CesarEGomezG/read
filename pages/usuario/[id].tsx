@@ -88,8 +88,7 @@ const PaginaUsuario = () => {
                         margin-bottom: 56px;
                     }
                     .PaginaUsuario {
-                        padding: 16px;
-                        max-width: 768px;
+                        padding: 16px 12px;
                         margin: 0 auto;
                     }
                     .PaginaUsuario p {
@@ -98,6 +97,7 @@ const PaginaUsuario = () => {
                     .PaginaUsuario .datosUsuario {
                         display: flex;
                         overflow: hidden;
+                        margin-left: 4px;
                     }
                     .PaginaUsuario .datosUsuario .fotoUsuario {
                         width: 60px;
@@ -112,11 +112,12 @@ const PaginaUsuario = () => {
                         font-size: 1.25em;
                     }
                     .PaginaUsuario .presentacion {
-                        margin: 12px 0;
+                        margin: 12px 0 12px 4px;
                     }
                     .PaginaUsuario .contacto {
                         display: flex;
                         flex-wrap: wrap;
+                        margin-left: 4px;
                     }
                     .PaginaUsuario .contacto .redSocial {
                         border: 1px solid black;
@@ -126,11 +127,12 @@ const PaginaUsuario = () => {
                     }
                     .PaginaUsuario .titulo {
                         font-size: 1.25em;
-                        margin-bottom: 8px;
+                        margin: 0 0 8px 4px;
                     }
                     .PaginaUsuario .blogs {
                         display: flex;
                         flex-wrap: wrap;
+                        margin-left: 4px;
                     }
                     .PaginaUsuario .blogs .blog {
                         margin: 0 8px 6px 0;

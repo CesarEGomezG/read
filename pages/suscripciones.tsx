@@ -13,7 +13,7 @@ const PaginaSuscripciones = () => {
             <ContenedorLecturas titulo={"Lecturas recientes de los blogs a los que estoy suscrito"} lecturas={mockLecturasBasico} />
             <style jsx>{`
                 .espacioBarraSuperior {
-                    margin-bottom: 68px;
+                    margin-bottom: 56px;
                 }
             `}</style>
         </div>

@@ -13,7 +13,7 @@ const PaginaLeerDespues = () => {
             <ContenedorLecturas titulo={"Lecturas pendientes por leer"} lecturas={mockLecturasBasico} pendientes={true} />
             <style jsx>{`
                 .espacioBarraSuperior {
-                    margin-bottom: 68px;
+                    margin-bottom: 56px;
                 }
             `}</style>
         </div>

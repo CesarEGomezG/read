@@ -108,6 +108,7 @@ const Explorar = () => {
                         border: 1px solid black;
                         padding: 4px 8px;
                         border-radius: 4px;
+                        background-color: #eee;
                     }
                     .Explorar .tipos .tipo .nombre {
                         margin: 0;
@@ -124,7 +125,8 @@ const Explorar = () => {
                         align-items: center;
                         border: 1px solid black;
                         margin: 6px;
-                        border-radius: 4px;
+                        border-radius: 2px;
+                        background-color: #eee;
                     }
 
                     @media only screen and (min-width: 426px) {

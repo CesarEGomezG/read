@@ -26,9 +26,14 @@ const ContenedorColecciones = ({ colecciones }) => {
                         grid-template-columns: 1fr 1fr;
                     }
                 }
-                @media only screen and (min-width: 626px) {
+                @media only screen and (min-width: 769px) {
                     .ContenedorColecciones {
                         grid-template-columns: 1fr 1fr 1fr;
+                    }
+                }
+                @media only screen and (min-width: 1141px) {
+                    .ContenedorColecciones {
+                        grid-template-columns: 1fr 1fr 1fr 1fr;
                     }
                 }
             `}</style>

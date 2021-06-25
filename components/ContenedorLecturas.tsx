@@ -5,10 +5,11 @@ import Lectura from "../components/Lectura";
 interface IPropsContenedorLecturas {
     titulo?: string,
     lecturas: ILecturaBasico[],
-    pendientes?: boolean
+    pendientes?: boolean,
+    ocultarBlogs?: boolean
 }
 
-const ContenedorLecturas = ({ titulo, lecturas, pendientes }: IPropsContenedorLecturas) => {
+const ContenedorLecturas = ({ titulo, lecturas, pendientes, ocultarBlogs }: IPropsContenedorLecturas) => {
     return (
         <div className="ContenedorLecturas">
             <h2>{titulo}</h2>
@@ -17,7 +18,7 @@ const ContenedorLecturas = ({ titulo, lecturas, pendientes }: IPropsContenedorLe
                     lecturas && lecturas.length > 0 && lecturas.map(lectura => {
                         return(
                             <li key={lectura.id}>
-                                <Lectura lectura={lectura} pendiente={pendientes} />
+                                <Lectura lectura={lectura} pendiente={pendientes} ocultarBlog={ocultarBlogs} />
                             </li>
                         );
                     })
@@ -28,11 +29,8 @@ const ContenedorLecturas = ({ titulo, lecturas, pendientes }: IPropsContenedorLe
                 }
             </ul> 
                 <style jsx>{`
-                    .ContenedorLecturas {
-                        margin: 0 12px;
-                    }
                     .ContenedorLecturas h2 {
-                        margin: 12px 4px 8px 4px;
+                        margin: 0 6px 8px 6px;
                     }
                     .ContenedorLecturas ul {
                         margin: 0;
@@ -45,7 +43,7 @@ const ContenedorLecturas = ({ titulo, lecturas, pendientes }: IPropsContenedorLe
                         list-style-type: none;
                     }
                     .ContenedorLecturas ul .mensajeVacio {
-                        margin: 0;
+                        margin: 0 0 0 6px;
                     }
                     
                     @media only screen and (min-width: 426px) {
@@ -53,17 +51,17 @@ const ContenedorLecturas = ({ titulo, lecturas, pendientes }: IPropsContenedorLe
                             grid-template-columns: 1fr 1fr;
                         }
                     }
-                    @media only screen and (min-width: 626px) {
-                        ContenedorLecturas ul {
+                    @media only screen and (min-width: 691px) {
+                        .ContenedorLecturas ul {
                             grid-template-columns: 1fr 1fr 1fr;
                         }
                     }
-                    @media only screen and (min-width: 826px) {
+                    @media only screen and (min-width: 1021px) {
                         .ContenedorLecturas ul {
                             grid-template-columns: 1fr 1fr 1fr 1fr;
                         }
                     }
-                    @media only screen and (min-width: 1026px) {
+                    @media only screen and (min-width: 1351px) {
                         .ContenedorLecturas ul {
                             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
                         }

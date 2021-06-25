@@ -6,14 +6,17 @@ import lecturasBasico from "../mocks/lecturasBasico";
 
 const Principal = () => {
     return (
-        <div>
+        <div className="PaginaPrincipal">
             <BarraSuperior />
             <div className="espacioBarraSuperior"></div>
             <ContenedorLecturas titulo="Lecturas de blogs a los que estoy suscrito" lecturas={lecturasBasico} />
             <ContenedorLecturas titulo="Lecturas recomendadas" lecturas={lecturasBasico} />
             <style jsx>{`
                 .espacioBarraSuperior {
-                    margin-bottom: 68px;
+                    margin-bottom: 56px;
+                }
+                .PaginaPrincipal {
+                    padding: 12px;
                 }
             `}</style>
         </div>
