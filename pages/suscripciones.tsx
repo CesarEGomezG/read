@@ -15,6 +15,9 @@ const PaginaSuscripciones = () => {
                 .espacioBarraSuperior {
                     margin-bottom: 56px;
                 }
+                .PaginaSuscripciones {
+                    padding: 12px;
+                }
             `}</style>
         </div>
     )

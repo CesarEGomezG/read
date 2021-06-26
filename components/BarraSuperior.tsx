@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 import Router from "next/router"
 import Link from "next/link";
 
@@ -26,6 +27,10 @@ const BarraSuperior = () => {
     if(mostrarBusqueda) {
         return (
             <div id="BarraSuperior" className="BarraSuperior">
+                <Head>
+                    <title>Read | Plataforma de Lecturas</title>
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
                 <img src="/iconoRegresar.png" alt="Boton para regresar" onClick={() => setMostrarBusqueda(false)} />
                 <input type="text" placeholder="Buscar..." autoFocus />
                 <style jsx>{`
@@ -59,6 +64,10 @@ const BarraSuperior = () => {
     } else return (
         <>
             <div id="BarraSuperior" className="BarraSuperior">
+                <Head>
+                    <title>Read | Plataforma de Lecturas</title>
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
                 <div className="izquierda">
                     <Link href="/">
                         <h2 className="nombreApp">Read</h2>
@@ -205,8 +214,8 @@ const BarraSuperior = () => {
                     </Link>
                     <style jsx>{`
                         .modal {
-                            width: 150px;
-                            padding: 8px 4px;
+                            width: 130px;
+                            padding: 8px 8px;
                             position: fixed;
                             top: 56px;
                             right: 0;
@@ -214,9 +223,10 @@ const BarraSuperior = () => {
                             background: white;
                             border: 1px solid lightgray;
                             border-radius: 2px;
+                            overflow: hidden;
                         }
                         .modal .nombreUsuario {
-                            margin: 0 0 8px 0;
+                            margin: 0 0 10px 0;
                             padding-bottom: 8px;
                             border-bottom: 1px solid lightgray;
                             font-weight: bold;

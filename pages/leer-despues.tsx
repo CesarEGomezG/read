@@ -15,6 +15,9 @@ const PaginaLeerDespues = () => {
                 .espacioBarraSuperior {
                     margin-bottom: 56px;
                 }
+                .PaginaLeerDespues {
+                    padding: 12px;
+                }
             `}</style>
         </div>
     )
