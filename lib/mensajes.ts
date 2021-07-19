@@ -1,0 +1,1 @@
+export const NO_EXISTE = "No existe el endpoint buscado";
