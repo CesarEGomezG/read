@@ -1,59 +1,87 @@
-import React from "react";
+import { GetServerSideProps } from "next";
+import axios from "axios";
 
 import BarraSuperior from "../components/BarraSuperior";
 
-const PaginaConfiguracion = () => {
+import { primeraLetraMayuscula } from "../lib/datosPersonales";
+
+export const getServerSideProps: GetServerSideProps = async ({}) => {
+    try {
+        const id = "60facb280537a78e1003336e"; // *** Corregir esto
+        const { data: { datos: { usuario } } } = await axios.get(`${process.env.NEXT_PUBLIC_URL_API}/usuarios/${id}`);
+        return {
+            props: {
+                usuario
+            }
+        };
+    } catch(error) {
+        return {
+            props: {
+                usuario: null
+            }
+        }
+    }
+}
+
+const PaginaConfiguracion = ({ usuario }) => {
     return (
         <div className="PaginaConfiguracion">
-            <BarraSuperior />
+            <BarraSuperior usuario={usuario} />
             <div className="espacioBarraSuperior"></div>
             <h2>Configuración de la Cuenta</h2>
             <div className="areaFoto">
-                <img src={"https://media-exp1.licdn.com/dms/image/C4E03AQH_x3mmyCFW_w/profile-displayphoto-shrink_200_200/0/1624242119528?e=1629936000&v=beta&t=bzeOG3eJr6FHpvqivwMLQJHoX0pa1SFvAwODcw-GRwM"} alt="Foto de perfil del usuario" />
+                <img src={usuario ? usuario.imagenPerfil : ""} alt="Foto de perfil del usuario" />
                 <p className="textoUrlFoto">Url de la foto de perfil:</p>
-                <input className="inputUrlFoto" type="text" placeholder="Inserta la url aquí..." />
+                <input className="inputUrlFoto" type="text" placeholder="Inserta la url aquí..." defaultValue={usuario ? usuario.imagenPerfil : ""} />
             </div>
             <h3>Presentación</h3>
-            <textarea className="inputPresentacion" placeholder="Presentación..." />
+            <textarea className="inputPresentacion" placeholder="Presentación..." defaultValue={usuario ? usuario.presentacion : ""} />
             <h3>Datos personales</h3>
             <p className="descripcion">Son datos que se necesitan para el uso de la plataforma. A excepción del nombre de usuario, nombre(s) y apellido(s), ningún otro usuario podrá verlos.</p>
             <div className="areaDatos">
                 <div className="dato">
                     <p className="nombreCampo">Nombre de Usuario</p>
-                    <input className="inputCampo" type="text" placeholder="Nombre de usuario..." />
+                    <input className="inputCampo" type="text" placeholder="Nombre de usuario..." defaultValue={usuario ? usuario.nombreUsuario : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">Correo Electrónico</p>
-                    <input className="inputCampo" type="text" placeholder="Correo Electrónico..." />
+                    <input className="inputCampo" type="text" placeholder="Correo Electrónico..." defaultValue={usuario ? usuario.correo : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">Número de Teléfono</p>
-                    <input className="inputCampo" type="number" placeholder="Número de Teléfono..." />
+                    <input className="inputCampo" type="number" placeholder="Número de Teléfono..." defaultValue={usuario ? usuario.telefono : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">Nombre(s)</p>
-                    <input className="inputCampo" type="text" placeholder="Nombre(s)..." />
+                    <input className="inputCampo" type="text" placeholder="Nombre(s)..." defaultValue={usuario ? usuario.nombreCompleto.nombres.join(" ") : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">Apellido(s)</p>
-                    <input className="inputCampo" type="text" placeholder="Apellido(s)..." />
+                    <input className="inputCampo" type="text" placeholder="Apellido(s)..." defaultValue={usuario ? usuario.nombreCompleto.apellidos.join(" ") : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">Fecha de Nacimiento</p>
-                    <input className="inputCampoFecha" type="date" placeholder="Fecha de Nacimiento..." />
+                    <input className="inputCampoFecha" type="date" placeholder="Fecha de Nacimiento..." defaultValue={usuario ? usuario.fechaNacimiento : ""} />
                 </div>
                 <div className="dato">
-                    <p className="nombreCampo">Sexo</p>
-                    <select className="inputCampoSeleccion">
-                        <option>(Sin seleccionar)</option>
+                    <p className="nombreCampo">Género</p>
+                    <select className="inputCampoSeleccion" defaultValue={usuario ? primeraLetraMayuscula(usuario.genero) : ""}>
                         <option>Masculino</option>
                         <option>Femenino</option>
                         <option>Otro</option>
                     </select>
                 </div>
                 <div className="dato">
-                    <p className="nombreCampo">Lugar</p>
-                    <input className="inputCampo" type="text" placeholder="Lugar..." />
+                    <p className="nombreCampo">Ciudad</p>
+                    <input className="inputCampo" type="text" placeholder="Ciudad..." defaultValue={usuario ? usuario.lugar.ciudad : ""} />
+                </div>
+                <div className="dato">
+                    <p className="nombreCampo">Estado</p>
+                    <input className="inputCampo" type="text" placeholder="Estado..." defaultValue={usuario ? usuario.lugar.estado : ""} />
+                </div>
+                <div className="dato">
+                    <p className="nombreCampo">Pais</p>
+                    <input className="inputCampo" type="text" placeholder="Pais..." defaultValue={usuario ? usuario.lugar.pais : ""} />
                 </div>
             </div>
             <div className="espacioArriba"></div>
@@ -62,35 +90,35 @@ const PaginaConfiguracion = () => {
             <div className="areaDatos">
                 <div className="dato">
                     <p className="nombreCampo">Sitio Web Personal</p>
-                    <input className="inputCampo" type="text" placeholder="Sitio Web Personal..." />
+                    <input className="inputCampo" type="text" placeholder="Sitio Web Personal..." defaultValue={usuario ? usuario.contacto.sitioWeb : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">Correo Electrónico Público</p>
-                    <input className="inputCampo" type="text" placeholder="Correo Electrónico Público..." />
+                    <input className="inputCampo" type="text" placeholder="Correo Electrónico Público..." defaultValue={usuario ? usuario.contacto.correo : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">Facebook</p>
-                    <input className="inputCampo" type="number" placeholder="Facebook..." />
+                    <input className="inputCampo" type="text" placeholder="Facebook..." defaultValue={usuario ? usuario.contacto.facebook : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">Twitter</p>
-                    <input className="inputCampo" type="text" placeholder="Twitter..." />
+                    <input className="inputCampo" type="text" placeholder="Twitter..." defaultValue={usuario ? usuario.contacto.twitter : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">Instagram</p>
-                    <input className="inputCampo" type="text" placeholder="Instagram..." />
+                    <input className="inputCampo" type="text" placeholder="Instagram..." defaultValue={usuario ? usuario.contacto.instagram : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">YouTube</p>
-                    <input className="inputCampo" type="text" placeholder="YouTube..." />
+                    <input className="inputCampo" type="text" placeholder="YouTube..." defaultValue={usuario ? usuario.contacto.youtube : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">LinkedIn</p>
-                    <input className="inputCampo" type="text" placeholder="LinkedIn..." />
+                    <input className="inputCampo" type="text" placeholder="LinkedIn..." defaultValue={usuario ? usuario.contacto.linkedIn : ""} />
                 </div>
                 <div className="dato">
                     <p className="nombreCampo">TikTok</p>
-                    <input className="inputCampo" type="text" placeholder="TikTok..." />
+                    <input className="inputCampo" type="text" placeholder="TikTok..." defaultValue={usuario ? usuario.contacto.tiktok : ""} />
                 </div>
             </div>
             <div className="espacioArriba"></div>
@@ -162,6 +190,7 @@ const PaginaConfiguracion = () => {
                     margin: 0 auto 12px auto;
                     resize: none;
                     text-align: center;
+                    font-size: 16px;
                 }
                 .PaginaConfiguracion .areaDatos {
                     display: grid;

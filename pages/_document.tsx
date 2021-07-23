@@ -1,4 +1,6 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+
+import { ProveedorContextoGlobal } from "../contextoGlobal";
 
 class MyDocument extends Document {
   render() {
@@ -6,8 +8,10 @@ class MyDocument extends Document {
       <Html lang="es">
         <Head />
         <body>
-          <Main />
-          <NextScript />
+            <ProveedorContextoGlobal>
+              <Main />
+              <NextScript />
+            </ProveedorContextoGlobal>
         </body>
       </Html>
     )

@@ -1,15 +1,34 @@
-import React from "react";
+import { GetServerSideProps } from "next";
 import Link from "next/link";
+import axios from "axios";
 
 import BarraSuperior from "../../components/BarraSuperior";
 import ContenedorLecturas from "../../components/ContenedorLecturas";
 
 import mockLecturasBasico from "../../mocks/lecturasBasico";
 
-const PaginaColeccion = () => {
+export const getServerSideProps: GetServerSideProps = async ({}) => {
+    try {
+        const id = "60facb280537a78e1003336e"; // *** Corregir esto
+        const { data: { datos: { usuario } } } = await axios.get(`${process.env.NEXT_PUBLIC_URL_API}/usuarios/${id}`);
+        return {
+            props: {
+                usuario
+            }
+        };
+    } catch(error) {
+        return {
+            props: {
+                usuario: null
+            }
+        }
+    }
+}
+
+const PaginaColeccion = ({ usuario }) => {
     return (
         <div className="PaginaColeccion">
-            <BarraSuperior />
+            <BarraSuperior usuario={usuario} />
             <div className="espacioBarraSuperior"></div>
             <h2>Nombre de la colección</h2>
             <Link href="/usuario/0">

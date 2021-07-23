@@ -3,9 +3,11 @@ import Head from "next/head";
 import Router from "next/router"
 import Link from "next/link";
 
-const BarraSuperior = () => {
-    const [mostrarModal, setMostrarModal] = useState(false);
-    const [mostrarBusqueda, setMostrarBusqueda] = useState(false);
+const BarraSuperior = ({ usuario }) => {
+    console.log("BarraSuperior -> ", usuario);
+
+    const [ mostrarModal, setMostrarModal ] = useState(false);
+    const [ mostrarBusqueda, setMostrarBusqueda ] = useState(false);
     useEffect(() => {
         if(Router.route.startsWith("/buscar") && document.querySelector("body #__next .BarraSuperior").scrollWidth < 680) {
             setMostrarBusqueda(true);
@@ -22,6 +24,9 @@ const BarraSuperior = () => {
                 setMostrarModal(false);
             }
             posicionScrollPrevia = posicionScrollActual;
+        }
+        return () => {
+            window.onscroll = null;
         }
     }, []);
     if(mostrarBusqueda) {
@@ -102,7 +107,7 @@ const BarraSuperior = () => {
                     <Link href="/buscar">
                         <img className="botonIcono iconoBuscar" src="/iconoBuscar.png" alt="Boton para buscar" onClick={() => setMostrarBusqueda(true)} />
                     </Link>
-                    <img className="fotoPerfil" src={"https://media-exp1.licdn.com/dms/image/C4E03AQH_x3mmyCFW_w/profile-displayphoto-shrink_200_200/0/1624242119528?e=1629936000&v=beta&t=bzeOG3eJr6FHpvqivwMLQJHoX0pa1SFvAwODcw-GRwM"} alt="Foto de perfil del usuario" onClick={() => setMostrarModal(!mostrarModal)} />
+                    <img className="fotoPerfil" src={usuario ? usuario.imagenPerfil : ""} alt="Foto de perfil del usuario" onClick={() => setMostrarModal(!mostrarModal)} />
                 </div>
                 <style jsx>{`
                     .BarraSuperior {
@@ -202,15 +207,15 @@ const BarraSuperior = () => {
             {
                 mostrarModal &&
                 <div className="modal">
-                    <p className="nombreUsuario">CesarEGomezG755</p>
-                    <Link href={`/usuario/${"0"}`}>
+                    <p className="nombreUsuario">{usuario ? usuario.nombreUsuario : ""}</p>
+                    <Link href={`/usuario/${usuario ? usuario._id : ""}`}>
                         <p className="opcion">Ver mi perfil</p>
                     </Link>
                     <Link href="/configuracion">
                         <p className="opcion">Configuración</p>
                     </Link>
                     <Link href="/iniciar-sesion">
-                        <p className="opcion ultimaOpcion">Cerrar sesión</p>
+                        <p className="opcion ultimaOpcion" onClick={() => console.log("No hace nada")}>Cerrar sesión</p>
                     </Link>
                     <style jsx>{`
                         .modal {

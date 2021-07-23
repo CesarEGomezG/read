@@ -5,6 +5,9 @@ import Axios from "axios";
 import BarraSuperiorLogo from "../components/BarraSuperiorLogo";
 
 const CrearCuenta = () => {
+
+    const estadoGlobal = null;
+
     const [nombres, setNombres] = useState<string>("");
     const [apellidos, setApellidos] = useState<string>("");
     const [fechaNacimiento, setFechaNacimiento] = useState<string>("");
@@ -12,6 +15,7 @@ const CrearCuenta = () => {
     const [correo, setCorreo] = useState<string>("");
     const [contrasenia, setContrasenia] = useState<string>("");
     const [confirmarContrasenia, setConfirmarContrasenia] = useState<string>("");
+    const [genero, setGenero] = useState<string>("Femenino");
 
     const campoNombres = useRef(null);
     const campoApellidos = useRef(null);
@@ -20,6 +24,9 @@ const CrearCuenta = () => {
     const campoCorreo = useRef(null);
     const campoContrasenia = useRef(null);
     const campoConfirmarContrasenia = useRef(null);
+    const campoGenero = useRef(null);
+
+    const [mensajeError, setMensajeError] = useState<string>("");
 
     const cambioInput = (refCampo, modificadorEstado) => {
         modificadorEstado(refCampo.current.value);
@@ -27,18 +34,27 @@ const CrearCuenta = () => {
 
     const crearCuenta = async (evento) => {
         evento.preventDefault();
-        try {
-            await Axios.post("http://localhost:3000/api/autenticacion/crear-cuenta", {
-                tipo: "nombreUsuario",
-                nombres,
-                apellidos,
-                fechaNacimiento,
-                nombreUsuario,
-                correo,
-                contrasenia
-            });
-        } catch(error) {
-            alert(error.message);
+        if(contrasenia === confirmarContrasenia) {
+            let nombresListos = nombres.split(" ");
+            nombresListos = nombresListos.filter(nombre => nombre !== "");
+            let apellidosListos = apellidos.split(" ");
+            apellidosListos = apellidosListos.filter(apellido => apellido !== "");
+            let correoListo = correo.toLowerCase();
+            let generoListo = genero.toLowerCase();
+            try {
+                const { data: { datos: { idUsuario } } } = await Axios.post(`${process.env.NEXT_PUBLIC_URL_API}/usuarios`, {
+                    nombreUsuario,
+                    nombres: nombresListos,
+                    apellidos: apellidosListos,
+                    correo: correoListo,
+                    contrasenia,
+                    fechaNacimiento,
+                    genero: generoListo
+                });
+                const { data: { datos: { usuario } } } = await Axios.get(`${process.env.NEXT_PUBLIC_URL_API}/usuarios/${idUsuario}`);
+            } catch(error) {
+                setMensajeError(error.message);
+            }
         }
     }
 
@@ -57,13 +73,22 @@ const CrearCuenta = () => {
                     <input className="campo" type="text" placeholder="Correo electrónico" ref={campoCorreo} onChange={() => cambioInput(campoCorreo, setCorreo)} />
                     <input className="campo" type="text" placeholder="Nombre(s)" ref={campoNombres} onChange={() => cambioInput(campoNombres, setNombres)} />
                     <input className="campo" type="text" placeholder="Apellido(s)" ref={campoApellidos} onChange={() => cambioInput(campoApellidos, setApellidos)} />
-                    <input className="campo" type="text" placeholder="Fecha de Nacimiento" ref={campoFechaNacimiento} onChange={() => cambioInput(campoFechaNacimiento, setFechaNacimiento)} />
+                    <input className="campo" type="date" placeholder="Fecha de Nacimiento" ref={campoFechaNacimiento} onChange={() => cambioInput(campoFechaNacimiento, setFechaNacimiento)} />
                     <input className="campo" type="password" placeholder="Contraseña" ref={campoContrasenia} onChange={() => cambioInput(campoContrasenia, setContrasenia)} />
                     <input className="campo" type="password" placeholder="Confirmar contraseña" ref={campoConfirmarContrasenia} onChange={() => cambioInput(campoConfirmarContrasenia, setConfirmarContrasenia)} />
+                    <select className="campo" ref={campoGenero} onChange={() => cambioInput(campoGenero, setGenero)}>
+                        <option>Femenino</option>
+                        <option>Masculino</option>
+                        <option>Otro</option>
+                    </select>
                     <button disabled={
                         nombreUsuario.length === 0 || correo.length === 0 || nombres.length === 0 || apellidos.length === 0 || fechaNacimiento.length === 0 || contrasenia.length === 0 || confirmarContrasenia.length === 0 || contrasenia !== confirmarContrasenia
                     }>Registrarse</button>
                 </form>
+                {
+                    mensajeError &&
+                    <p className="mensajeError">{mensajeError}</p>
+                }
                 <div className="crearCuenta">
                     <span>¿Ya tienes una cuenta? </span>
                     <Link href="/iniciar-sesion">Inicia sesión</Link>
@@ -103,7 +128,7 @@ const CrearCuenta = () => {
                     }
                     .CrearCuenta form {
                         text-align: center;
-                        margin: 0 0 36px 0;
+                        margin: 0 0 0px 0;
                     }
                     .CrearCuenta form .campo {
                         display: inline-block;
@@ -120,9 +145,13 @@ const CrearCuenta = () => {
                         border-radius: 4px;
                         margin: 12px auto 0 auto;
                     }
+                    .CrearCuenta .mensajeError {
+                        margin: 24px auto 0 auto;
+                        text-align: center;
+                    }
                     .CrearCuenta .crearCuenta {
                         text-align: center;
-                        margin: 0 0 32px 0;
+                        margin: 36px 0 32px 0;
                     }
 
                     @media only screen and (min-width: 426px) {
