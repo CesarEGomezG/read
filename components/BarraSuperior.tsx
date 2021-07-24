@@ -3,12 +3,16 @@ import Head from "next/head";
 import Router from "next/router"
 import Link from "next/link";
 
-const BarraSuperior = ({ usuario }) => {
-    console.log("BarraSuperior -> ", usuario);
+const BarraSuperior = () => {
+    const [ usuario, setUsuario ] = useState(null);
 
     const [ mostrarModal, setMostrarModal ] = useState(false);
     const [ mostrarBusqueda, setMostrarBusqueda ] = useState(false);
+
     useEffect(() => {
+        if(sessionStorage.getItem("usuario")) {
+            setUsuario(JSON.parse(sessionStorage.getItem("usuario")));
+        }
         if(Router.route.startsWith("/buscar") && document.querySelector("body #__next .BarraSuperior").scrollWidth < 680) {
             setMostrarBusqueda(true);
         } else {
@@ -29,6 +33,12 @@ const BarraSuperior = ({ usuario }) => {
             window.onscroll = null;
         }
     }, []);
+
+    const cerrarSesion = () => {
+        sessionStorage.removeItem("usuario");
+        document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+
     if(mostrarBusqueda) {
         return (
             <div id="BarraSuperior" className="BarraSuperior">
@@ -107,7 +117,14 @@ const BarraSuperior = ({ usuario }) => {
                     <Link href="/buscar">
                         <img className="botonIcono iconoBuscar" src="/iconoBuscar.png" alt="Boton para buscar" onClick={() => setMostrarBusqueda(true)} />
                     </Link>
-                    <img className="fotoPerfil" src={usuario ? usuario.imagenPerfil : ""} alt="Foto de perfil del usuario" onClick={() => setMostrarModal(!mostrarModal)} />
+                    {
+                        usuario && usuario.imagenPerfil &&
+                        <img className="fotoPerfil" src={usuario ? usuario.imagenPerfil : "/iconoUsuario.png"} alt="Foto de perfil del usuario" onClick={() => setMostrarModal(!mostrarModal)} />
+                    }
+                    {
+                        (!usuario || (usuario && !usuario.imagenPerfil)) &&
+                        <img className="sinFotoPerfil" src="/iconoUsuario.png" alt="Foto de perfil del usuario" onClick={() => setMostrarModal(!mostrarModal)} />
+                    }
                 </div>
                 <style jsx>{`
                     .BarraSuperior {
@@ -179,6 +196,15 @@ const BarraSuperior = ({ usuario }) => {
                         border-radius: 50%;
                         margin-left: 12px;
                     }
+                    .BarraSuperior .derecha .sinFotoPerfil {
+                        width: 24px;
+                        height: 24px;
+                        padding: 2px;
+                        object-fit: cover;
+                        border: 2px solid black;
+                        border-radius: 50%;
+                        margin-left: 12px;
+                    }
 
                     @media only screen and (min-width: 681px) {
                         .BarraSuperior .izquierda .buscador {
@@ -205,7 +231,7 @@ const BarraSuperior = ({ usuario }) => {
                 `}</style>
             </div>
             {
-                mostrarModal &&
+                mostrarModal && usuario &&
                 <div className="modal">
                     <p className="nombreUsuario">{usuario ? usuario.nombreUsuario : ""}</p>
                     <Link href={`/usuario/${usuario ? usuario._id : ""}`}>
@@ -215,7 +241,7 @@ const BarraSuperior = ({ usuario }) => {
                         <p className="opcion">Configuración</p>
                     </Link>
                     <Link href="/iniciar-sesion">
-                        <p className="opcion ultimaOpcion" onClick={() => console.log("No hace nada")}>Cerrar sesión</p>
+                        <p className="opcion ultimaOpcion" onClick={() => cerrarSesion()}>Cerrar sesión</p>
                     </Link>
                     <style jsx>{`
                         .modal {
@@ -244,6 +270,34 @@ const BarraSuperior = ({ usuario }) => {
                         }
                     `}</style>
                 </div>
+            }
+            {
+                mostrarModal && !usuario &&
+                <div className="modal">
+                <Link href="/iniciar-sesion">
+                    <p className="opcion ultimaOpcion">Iniciar Sesión</p>
+                </Link>
+                <style jsx>{`
+                    .modal {
+                        width: 130px;
+                        padding: 8px 8px;
+                        position: fixed;
+                        top: 56px;
+                        right: 0;
+                        z-index: 1;
+                        background: white;
+                        border: 1px solid lightgray;
+                        border-radius: 2px;
+                        overflow: hidden;
+                    }
+                    .modal .opcion {
+                        margin: 0 0 16px 0;
+                    }
+                    .modal .ultimaOpcion {
+                        margin: 0 0 4px 0;
+                    }
+                `}</style>
+            </div>
             }
         </>
     );

@@ -1,12 +1,12 @@
 import React, { useState, useRef } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
-import Axios from "axios";
+import axios from "axios";
 
 import BarraSuperiorLogo from "../components/BarraSuperiorLogo";
 
 const CrearCuenta = () => {
-
-    const estadoGlobal = null;
+    const router = useRouter();
 
     const [nombres, setNombres] = useState<string>("");
     const [apellidos, setApellidos] = useState<string>("");
@@ -42,7 +42,7 @@ const CrearCuenta = () => {
             let correoListo = correo.toLowerCase();
             let generoListo = genero.toLowerCase();
             try {
-                const { data: { datos: { idUsuario } } } = await Axios.post(`${process.env.NEXT_PUBLIC_URL_API}/usuarios`, {
+                const { data: { datos: { idUsuario } } } = await axios.post(`${process.env.NEXT_PUBLIC_URL_API}/usuarios`, {
                     nombreUsuario,
                     nombres: nombresListos,
                     apellidos: apellidosListos,
@@ -51,7 +51,23 @@ const CrearCuenta = () => {
                     fechaNacimiento,
                     genero: generoListo
                 });
-                const { data: { datos: { usuario } } } = await Axios.get(`${process.env.NEXT_PUBLIC_URL_API}/usuarios/${idUsuario}`);
+
+                const { data: { datos: { tokenAutenticacion } } } = await axios.post(process.env.NEXT_PUBLIC_URL_API + "/auth/iniciar-sesion", null, {
+                    auth: {
+                        username: nombreUsuario,
+                        password: contrasenia
+                    }
+                });
+                document.cookie = `token=${tokenAutenticacion}`;
+
+                const { data: { datos: { usuario } } } = await axios.get(`${process.env.NEXT_PUBLIC_URL_API}/usuarios/${idUsuario}`, {
+                    headers: {
+                        "Authorization": `Bearer ${tokenAutenticacion}`
+                    }
+                });
+                sessionStorage.setItem("usuario", JSON.stringify(usuario));
+
+                router.push("/");
             } catch(error) {
                 setMensajeError(error.message);
             }
@@ -151,7 +167,7 @@ const CrearCuenta = () => {
                     }
                     .CrearCuenta .crearCuenta {
                         text-align: center;
-                        margin: 36px 0 32px 0;
+                        margin: 28px 0 32px 0;
                     }
 
                     @media only screen and (min-width: 426px) {

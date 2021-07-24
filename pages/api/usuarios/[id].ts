@@ -1,11 +1,18 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ObjectId } from "mongodb";
+import passport from "passport";
+
 import { connectToDatabase } from "../../../lib/mongo";
+import { usarEstrategiaJwt } from "../../../lib/auth/strategies/jwt";
+import correrMiddleware from "../../../lib/correrMiddleware";
+
+usarEstrategiaJwt();
 
 // * Falta funcion de cambiar contrasenia
 
 const usuariosId = async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method === "GET") {
+        await correrMiddleware(req, res, passport.authenticate("jwt", { session: false }));
         const { id } = req.query;
         if(id) {
             try {
@@ -22,6 +29,7 @@ const usuariosId = async (req: NextApiRequest, res: NextApiResponse) => {
         } else res.status(400).json({ error: "Faltan parámetros" });
         
     } else if(req.method === "PATCH") {
+        await correrMiddleware(req, res, passport.authenticate("jwt", { session: false }));
         const { id } = req.query;
         const { nombreUsuario, nombreCompleto, correo, telefono, imagenPerfil, fechaNacimiento, genero, lugar, contacto, presentacion } = req.body;
         if(id && (nombreUsuario || nombreCompleto || correo || telefono || imagenPerfil || fechaNacimiento || genero || lugar || contacto || presentacion)) {

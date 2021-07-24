@@ -1,17 +1,20 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
-import Axios from "axios";
-
-import config from "../config";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 import BarraSuperiorLogo from "../components/BarraSuperiorLogo";
 
 const IniciarSesion = () => {
+    const router = useRouter();
+
     const [nombreUsuario, setNombreUsuario] = useState<string>("");
     const [contrasenia, setContrasenia] = useState<string>("");
 
     const campoNombreUsuario = useRef(null);
     const campoContrasenia = useRef(null);
+
+    const [mensajeError, setMensajeError] = useState<string>("");
 
     const cambioInput = (refCampo, modificadorEstado) => {
         modificadorEstado(refCampo.current.value);
@@ -19,11 +22,26 @@ const IniciarSesion = () => {
 
     const iniciarSesion = async (evento) => {
         evento.preventDefault();
-        await Axios.post(config.urlApi + "/autenticacion/iniciar-sesion", {
-            tipo: "nombreUsuario",
-            nombreUsuario,
-            contrasenia
-        });
+        try {
+            const { data: { datos: { tokenAutenticacion, idUsuario } } } = await axios.post(process.env.NEXT_PUBLIC_URL_API + "/auth/iniciar-sesion", null, {
+                auth: {
+                    username: nombreUsuario,
+                    password: contrasenia
+                }
+            });
+            document.cookie = `token=${tokenAutenticacion}`;
+
+            const { data: { datos: { usuario } } } = await axios.get(`${process.env.NEXT_PUBLIC_URL_API}/usuarios/${idUsuario}`, {
+                headers: {
+                    "Authorization": `Bearer ${tokenAutenticacion}`
+                }
+            });
+            sessionStorage.setItem("usuario", JSON.stringify(usuario));
+
+            router.push("/");
+        } catch(error) {
+            setMensajeError(error.message);
+        }
     }
 
     return (
@@ -41,6 +59,10 @@ const IniciarSesion = () => {
                     <input className="campo" type="password" placeholder="Contraseña" ref={campoContrasenia} onChange={() => cambioInput(campoContrasenia, setContrasenia)} />
                     <button disabled={nombreUsuario.length === 0 || contrasenia.length === 0}>Iniciar sesión</button>
                 </form>
+                {
+                    mensajeError &&
+                    <p className="mensajeError">{mensajeError}</p>
+                }
                 <div className="crearCuenta">
                     <span>¿No tienes cuenta? </span>
                     <Link href="/crear-cuenta">Registrate</Link>
@@ -80,7 +102,7 @@ const IniciarSesion = () => {
                     }
                     .IniciarSesion form {
                         text-align: center;
-                        margin: 0 0 36px 0;
+                        margin: 0;
                     }
                     .IniciarSesion form .campo {
                         display: inline-block;
@@ -97,9 +119,13 @@ const IniciarSesion = () => {
                         border-radius: 4px;
                         margin: 12px auto 0 auto;
                     }
+                    .IniciarSesion .mensajeError {
+                        margin: 24px auto 0 auto;
+                        text-align: center;
+                    }
                     .IniciarSesion .crearCuenta {
                         text-align: center;
-                        margin: 0 0 32px 0;
+                        margin: 28px 0 32px 0;
                     }
 
                     @media only screen and (min-width: 426px) {

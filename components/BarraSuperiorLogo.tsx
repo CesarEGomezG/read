@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import Link from "next/link";
 
 const BarraSuperiorLogo = () => {
     return (
@@ -8,7 +9,9 @@ const BarraSuperiorLogo = () => {
                 <title>Read | Plataforma de Lecturas</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <h1>Read</h1>
+            <Link href="/">
+                <h1>Read</h1>
+            </Link>
             <style jsx>{`
                 .BarraSuperiorLogo {
                     background-color: lightblue;
