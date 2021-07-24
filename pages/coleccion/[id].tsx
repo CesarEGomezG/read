@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async ({}) => {
 const PaginaColeccion = ({ usuario }) => {
     return (
         <div className="PaginaColeccion">
-            <BarraSuperior usuario={usuario} />
+            <BarraSuperior />
             <div className="espacioBarraSuperior"></div>
             <h2>Nombre de la colección</h2>
             <Link href="/usuario/0">

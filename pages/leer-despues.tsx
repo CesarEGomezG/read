@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async ({}) => {
 const PaginaLeerDespues = ({ usuario }) => {
     return (
         <div className="PaginaLeerDespues">
-            <BarraSuperior usuario={usuario} />
+            <BarraSuperior />
             <div className="espacioBarraSuperior"></div>
             <ContenedorLecturas titulo={"Lecturas pendientes por leer"} lecturas={mockLecturasBasico} pendientes={true} />
             <style jsx>{`

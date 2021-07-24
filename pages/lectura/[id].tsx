@@ -44,7 +44,7 @@ const PaginaLectura = ({ usuario }) => {
     }, [router.query.id]);
     return (
         <>
-            <BarraSuperior usuario={usuario} />
+            <BarraSuperior />
             <div className="PaginaLectura">
                 <div className="espacioBarraSuperior"></div>
                 <div className="contenedorPortada">

@@ -21,10 +21,14 @@ if (!MONGODB_DB) {
  * during API Route usage.
  */
 
-let cached = global.mongo
+type objetoGlobal = NodeJS.Global & { mongo: any };
+
+const globalMongo: objetoGlobal = { mongo: null, ...global };
+
+let cached = globalMongo.mongo
 
 if (!cached) {
-  cached = global.mongo = { conn: null, promise: null }
+  cached = globalMongo.mongo = { conn: null, promise: null }
 }
 
 export async function connectToDatabase() {

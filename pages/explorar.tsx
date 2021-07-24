@@ -75,7 +75,7 @@ const Explorar = ({ usuario }) => {
     ]);
     return (
         <>
-            <BarraSuperior usuario={usuario} />
+            <BarraSuperior />
             <div className="Explorar">
                 <div className="espacioBarraSuperior"></div>
                 <div className="tipos">

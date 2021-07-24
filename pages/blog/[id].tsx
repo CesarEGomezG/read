@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async ({}) => {
 const PaginaBlog = ({ usuario }) => {
     return (
         <>
-            <BarraSuperior usuario={usuario} />
+            <BarraSuperior />
             <div className="PaginaBlog">
                 <div className="espacioBarraSuperior"></div>
                 <div className="contenedorPortada">

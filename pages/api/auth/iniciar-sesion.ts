@@ -9,7 +9,7 @@ import { usarEstrategiaBasic } from "../../../lib/auth/strategies/basic";
 
 usarEstrategiaBasic();
 
-const iniciarSesion = async (req: NextApiRequest, res: NextApiResponse) => { // * Ojo, no incluí next
+const iniciarSesion = async (req: NextApiRequest & { login: any }, res: NextApiResponse) => { // * Ojo, no incluí next
     if(req.method === "POST") {
         const tokenApiKey = process.env.ADMIN_API_KEY_TOKEN; // * Corregir: esto es provisional
         if(tokenApiKey) {

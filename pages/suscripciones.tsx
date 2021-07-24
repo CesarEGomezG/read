@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async ({}) => {
 const PaginaSuscripciones = ({ usuario }) => {
     return (
         <div className="PaginaSuscripciones">
-            <BarraSuperior usuario={usuario} />
+            <BarraSuperior />
             <div className="espacioBarraSuperior"></div>
             <ContenedorLecturas titulo={"Lecturas recientes de los blogs a los que estoy suscrito"} lecturas={mockLecturasBasico} />
             <style jsx>{`
