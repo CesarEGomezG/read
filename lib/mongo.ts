@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb'
+import { MongoClient } from 'mongodb';
 
 const MONGODB_URI = process.env.MONGODB_URI
 const MONGODB_DB = process.env.MONGODB_DB
@@ -21,11 +21,9 @@ if (!MONGODB_DB) {
  * during API Route usage.
  */
 
-type objetoGlobal = NodeJS.Global & { mongo: any };
+const globalMongo: any = { mongo: null, ...global };
 
-const globalMongo: objetoGlobal = { mongo: null, ...global };
-
-let cached = globalMongo.mongo
+let cached = globalMongo.mongo;
 
 if (!cached) {
   cached = globalMongo.mongo = { conn: null, promise: null }
