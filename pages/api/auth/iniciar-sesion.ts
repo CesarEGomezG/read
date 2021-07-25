@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 import { connectToDatabase } from "../../../lib/mongo";
 import { usarEstrategiaBasic } from "../../../lib/auth/strategies/basic";
-//import establecerCookie from "../../../lib/establecerCookie";
+//import establecerCookie from "../../../lib/establecerCookie"; //
 
 usarEstrategiaBasic();
 
