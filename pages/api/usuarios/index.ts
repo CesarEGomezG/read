@@ -2,8 +2,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt";
 import { connectToDatabase } from "../../../lib/mongo";
 
+import endpointVerUsuario from "../../../endpoints/verUsuario";
+
 const usuarios = async (req: NextApiRequest, res: NextApiResponse) => {
-    if(req.method === "POST") {
+    if(req.method === "GET") {
+        await endpointVerUsuario(req, res)
+    } else if(req.method === "POST") {
         const { nombreUsuario, nombres, apellidos, correo, contrasenia, fechaNacimiento, genero } = req.body;
         if(nombreUsuario && nombres && apellidos && correo && contrasenia && fechaNacimiento && genero ) {
             if(Array.isArray(nombres) && Array.isArray(apellidos)) {
